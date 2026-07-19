@@ -34,6 +34,9 @@ namespace Gerenciadores{
     void GerenciadorGrafico::render(sf::Text* txt){
         window->draw(*txt);
     }
+    void GerenciadorGrafico::render(sf::CircleShape* sprite){
+        window->draw(*sprite);
+    }
     bool GerenciadorGrafico::windowopen()const{
         return window->isOpen();
     }

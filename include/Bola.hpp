@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include "VectorTL.hpp"
 #include "Entidade.hpp"
+#include "Raquete.hpp"
 
 
 class Bola:public Entidade{
@@ -19,6 +20,9 @@ protected:
     float raio;
     CoordF velocidade;
     sf::CircleShape* sprite;
+    
+    std::vector<Raquete*> raquetes;
+    std::vector<Raquete*>::iterator it;
     
     CoordF tamJanela;
 public:
@@ -36,6 +40,14 @@ public:
     void setTamJanela(CoordF t){tamJanela = t;}
     
     void tratarColisaoParede();
+    
+    
+    void setRaquete(Raquete* r);
+    void tratarColisaoRaquete();
+    
+    sf::CircleShape* getSprite(){
+        return sprite;
+    }
     
 };
 

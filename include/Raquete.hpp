@@ -32,4 +32,8 @@ public://deixei os bools public para poder alterar eles direto da janela do jogo
     
     void mover();
     
+    sf::RectangleShape* getSprite(){
+        return sprite;
+    }
+    
 };

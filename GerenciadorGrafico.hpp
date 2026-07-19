@@ -30,6 +30,7 @@ namespace Gerenciadores{
             void render(sf::RectangleShape* hitbox);
             
             void render(sf::Text* txt);
+        void render(sf::CircleShape* sprite);
             
             bool windowopen()const;
             
