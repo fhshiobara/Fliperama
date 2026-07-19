@@ -19,6 +19,8 @@ protected:
     float raio;
     CoordF velocidade;
     sf::CircleShape* sprite;
+    
+    CoordF tamJanela;
 public:
     Bola(CoordF p, CoordF v, float r);
     ~Bola();
@@ -30,6 +32,10 @@ public:
     
     void setRaio(float r){raio = r;}
     float getRaio(){return raio;}
+    
+    void setTamJanela(CoordF t){tamJanela = t;}
+    
+    void tratarColisaoParede();
     
 };
 
