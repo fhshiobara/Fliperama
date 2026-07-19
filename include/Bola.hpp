@@ -11,16 +11,19 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 #include "VectorTL.hpp"
+#include "Entidade.hpp"
 
-class Bola{
-private:
+
+class Bola:public Entidade{
+protected:
     float raio;
     CoordF velocidade;
-    CoordF pos;
     sf::CircleShape* sprite;
 public:
     Bola(CoordF p, CoordF v, float r);
     ~Bola();
+    
+    void mover();
     
     void setVelocidade(CoordF vel){velocidade = vel;}
     CoordF getVelocidade(){return velocidade;}
@@ -28,8 +31,6 @@ public:
     void setRaio(float r){raio = r;}
     float getRaio(){return raio;}
     
-    void setPos(CoordF p){pos = p;}
-    CoordF getPos(){return pos;}
 };
 
 #endif /* Bola_hpp */

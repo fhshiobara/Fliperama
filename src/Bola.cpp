@@ -7,7 +7,7 @@
 
 #include "Bola.hpp"
 
-Bola::Bola(CoordF p, CoordF v, float r):velocidade(v),pos(p),raio(r),sprite(NULL){
+Bola::Bola(CoordF p, CoordF v, float r):velocidade(v),raio(r),sprite(NULL){
     sprite = new sf::CircleShape;
     sprite->setRadius(raio);
     sprite->setOrigin(p.x,p.y);
@@ -19,5 +19,11 @@ Bola::~Bola(){
         delete sprite;
         sprite = NULL;
     }
+}
+
+void Bola::mover(){
+    pos.x = pos.x+velocidade.x;
+    
+    pos.y = pos.y+velocidade.y;
 }
 
