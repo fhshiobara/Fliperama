@@ -9,5 +9,16 @@
 #define Entidade_hpp
 
 #include <stdio.h>
+#include "VectorTL.hpp"
+
+class Entidade{
+protected:
+    CoordF pos;
+public:
+    Entidade();
+    ~Entidade();
+    void setPos(CoordF p);
+    CoordF getPos();
+};
 
 #endif /* Entidade_hpp */

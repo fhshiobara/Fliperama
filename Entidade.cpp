@@ -6,3 +6,12 @@
 //
 
 #include "Entidade.hpp"
+
+
+Entidade::Entidade():pos(0.f,0.f){}
+
+Entidade::~Entidade(){};
+
+void Entidade::setPos(CoordF p){pos = p;}
+
+CoordF Entidade::getPos(){return pos;}
