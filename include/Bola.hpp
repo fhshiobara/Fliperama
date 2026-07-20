@@ -26,7 +26,7 @@ protected:
     
     CoordF tamJanela;
 public:
-    Bola(CoordF p, CoordF v, float r);
+    Bola(CoordF v, float r);
     ~Bola();
     
     void mover();

@@ -7,10 +7,10 @@
 
 #include "Bola.hpp"
 
-Bola::Bola(CoordF p, CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0.f){
+Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0.f){
     sprite = new sf::CircleShape;
     sprite->setRadius(raio);
-    sprite->setOrigin(p.x,p.y);
+
     sprite->setFillColor(sf::Color::White);
     raquetes.clear();
     it = raquetes.begin();

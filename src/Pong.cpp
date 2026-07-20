@@ -8,7 +8,9 @@
 #include "Pong.hpp"
 
 Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()){
-    
+    R1 = new Raquete(CoordF(5.f,5.f), CoordF(30.f,20.f));
+    R2 = new Raquete(CoordF(5.f,5.f), CoordF (30.f,20.f));
+    bola = new Bola(CoordF(10.f,10.f),30.f);
 }
 
 Pong::~Pong(){

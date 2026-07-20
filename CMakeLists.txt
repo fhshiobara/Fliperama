@@ -49,8 +49,11 @@ file(GLOB_RECURSE ASSET_FILES CONFIGURE_DEPENDS
 # ============================================================
 set(SOURCES
     src/main.cpp
+    src/Entidade.cpp
     src/Bola.cpp
     src/Raquete.cpp
+    src/Pong.cpp
+    src/GerenciadorGrafico.cpp
     
     # Adicione novos arquivos .cpp aqui embaixo quando criá-los
 )
