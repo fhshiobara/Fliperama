@@ -15,9 +15,13 @@
 class Poderes:public Entidade{
 protected:
     sf::RectangleShape* sprite;
+    CoordF tamanho;
 public:
     Poderes();
     virtual ~Poderes();
+    
+    void setTamanho(CoordF t){tamanho = t;}
+    CoordF getTamanho(){return tamanho;}
     
     
 };

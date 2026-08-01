@@ -56,6 +56,7 @@ set(SOURCES
     src/GerenciadorGrafico.cpp
     src/Gol.cpp
     src/Poderes.cpp
+    src/PoderVelocidade.cpp
     
     # Adicione novos arquivos .cpp aqui embaixo quando criá-los
 )

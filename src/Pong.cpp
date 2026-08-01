@@ -84,8 +84,10 @@ void Pong::executar(){
                     if(aux == 0){
                         aux = -1;
                     }
-                    
-                    bola->setVelocidade(CoordF(bola->getVelocidadePadrao().x*aux,bola->getVelocidadePadrao().y*aux));
+                    if(bola->getVelocidade().x==0.f && bola->getVelocidade().y==0.f){
+                        
+                        bola->setVelocidade(CoordF(bola->getVelocidadePadrao().x*aux,bola->getVelocidadePadrao().y*aux));
+                    }
                 }
                 
                 if(event.key.code == sf::Keyboard::Escape){
