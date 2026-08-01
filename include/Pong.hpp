@@ -13,11 +13,13 @@
 #include "GerenciadorGrafico.hpp"
 #include "Raquete.hpp"
 
+
 class Pong{
 protected:
     Raquete* R1;
     Raquete* R2;
     Bola* bola;
+    Gol* G1
     Gerenciadores::GerenciadorGrafico* pGG;
     
 public:
