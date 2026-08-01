@@ -6,8 +6,8 @@
 //
 
 #include "Bola.hpp"
-
-Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0.f),ultimo(0){
+#include "Poderes.hpp"
+Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0.f),ultimo(0),ultima(NULL){
     sprite = new sf::CircleShape;
     sprite->setRadius(raio);
 
@@ -127,6 +127,7 @@ void Bola::tratarColisaoRaquete(){
                 ultimo = 2;
                 sprite->setFillColor(sf::Color::Red);
             }
+            ultima = (*it);
             atualizarSprite();
             break; // ja resolveu a colisao, nao precisa checar a outra raquete
         }
@@ -173,19 +174,30 @@ void Bola::tratarColisaoGol(){
         }
     }
 }
-/*
+
 void Bola::tratarColisaoPoderes(){
-    float esquerda = posRetangulo.x;
-    float direita  = posRetangulo.x + tamanhoRetangulo.x;
-    float topo     = posRetangulo.y;
-    float base     = posRetangulo.y + tamanhoRetangulo.y;
+    for(p = poderes.begin(); p != poderes.end(); p++){
+        CoordF tamanho = (*p)->getTamanho();
+        CoordF posPoder = (*p)->getPos();
 
-    float pontoX = std::max(esquerda, std::min(centroCirculo.x, direita));
-    float pontoY = std::max(topo, std::min(centroCirculo.y, base));
+        float esquerda = posPoder.x;
+        float direita  = posPoder.x + tamanho.x;
+        float topo     = posPoder.y;
+        float base     = posPoder.y + tamanho.y;
 
-    float difX = centroCirculo.x - pontoX;
-    float difY = centroCirculo.y - pontoY;
+        float pontoX = std::max(esquerda, std::min(pos.x, direita));
+        float pontoY = std::max(topo, std::min(pos.y, base));
 
-    colidiu = (difX*difX + difY*difY) < raio*raio;
+        float difX = pos.x - pontoX;
+        float difY = pos.y - pontoY;
+
+        float distanciaQuadrada = difX*difX + difY*difY;
+
+        if(distanciaQuadrada < raio*raio){
+            
+            (*p)->executar(this);   // dispara o efeito do poder
+            (*p)->setAtivo(true);
+            break; // apenas um poder ativado por frame
+        }
+    }
 }
-*/

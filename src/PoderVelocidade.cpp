@@ -23,6 +23,14 @@ float PoderVelocidade::getMult(){
 }
 
 void PoderVelocidade::executar(Bola* bola){
-    bola->setVelocidade(CoordF(bola->getVelocidade().x*multiplicador,bola->getVelocidade().y*multiplicador));
+    Raquete* r = bola->getUltima();
+    if(r != NULL){
+        CoordF vAtual = r->getVelocidade();
+        r->setVelocidade(CoordF(vAtual.x*multiplicador, vAtual.y*multiplicador));
+    }
 }
 
+void PoderVelocidade::setPos(CoordF p){
+    Entidade::setPos(p);
+    if(sprite!=NULL) sprite->setPosition(pos.x, pos.y);
+}

@@ -7,9 +7,10 @@
 
 #include "Poderes.hpp"
 
-Poderes::Poderes():sprite(NULL),tamanho(CoordF(50.f,50.f)),id(0){}
+Poderes::Poderes():sprite(NULL),tamanho(CoordF(50.f,50.f)),id(0),ativo(false){}
 
 Poderes::~Poderes(){
+    ativo = false;
     if(sprite!=NULL){
         delete sprite;
         sprite = NULL;

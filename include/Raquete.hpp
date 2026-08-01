@@ -32,6 +32,9 @@ public://deixei os bools public para poder alterar eles direto da janela do jogo
     void setSize(CoordF t);
     CoordF getSize();
     
+    void setVelocidade(CoordF v){velocidade = v;}
+    CoordF getVelocidade(){return velocidade;}
+    
     void mover();
     
     void setPos(CoordF p);

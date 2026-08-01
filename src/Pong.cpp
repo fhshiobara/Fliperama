@@ -12,8 +12,8 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
     G2 = new Gol(CoordF(0.f,0.f));
+    pV = new PoderVelocidade;
     bola = new Bola(CoordF(10.f,05.f),8.f);
-    pV = new PoderVelocidade();
     bola->setTamJanela(CoordF(1280.f,720.f));
     bola->setRaquete(R1);
     bola->setRaquete(R2);
@@ -61,6 +61,7 @@ void Pong::setPosInicial(){
     R1->setPos(CoordF(85.f,360.f));
     R2->setPos(CoordF(1180.f,360.f));
     bola->setPos(CoordF(85.f,300.f));
+    pV->setPos(CoordF(640.f,360.f));
 }
 
 void Pong::executar(){
@@ -116,6 +117,7 @@ void Pong::executar(){
         txtG1.setString(std::to_string(G1->getPontos()));
         txtG2.setString(std::to_string(G2->getPontos()));
         
+        pGG->render(pV->getSprite());
         pGG->render(&txtG1);
         pGG->render(&txtG2);
         pGG->render(R1->getSprite());

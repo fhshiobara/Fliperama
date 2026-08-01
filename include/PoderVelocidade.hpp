@@ -19,6 +19,9 @@ public:
     ~PoderVelocidade();
     float getMult();
     void executar(Bola* bola);
+    void setPos(CoordF p);
+    
+    sf::RectangleShape* getSprite(){return sprite;}
     
 };
 

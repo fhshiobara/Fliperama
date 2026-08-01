@@ -18,12 +18,15 @@ protected:
     sf::RectangleShape* sprite;
     CoordF tamanho;
     short int id;
+    bool ativo;
 public:
     Poderes();
     virtual ~Poderes();
     
     void setTamanho(CoordF t){tamanho = t;}
     CoordF getTamanho(){return tamanho;}
+    void setAtivo(bool a){ativo = a;}
+    bool getAtivo(){return ativo;}
     
     virtual void executar(Bola* bola)=0;
     

@@ -16,6 +16,7 @@
 #include "Gol.hpp"
 
 
+
 class Poderes;
 class Bola:public Entidade{
 protected:
@@ -24,6 +25,8 @@ protected:
     CoordF velocidadePadrao;
     short int ultimo;
     sf::CircleShape* sprite;
+    
+    Raquete* ultima;
     
     std::vector<Raquete*> raquetes;
     std::vector<Raquete*>::iterator it;
@@ -65,6 +68,12 @@ public:
     CoordF getVelocidadePadrao(){return velocidadePadrao;}
     
     void tratarColisaoPoderes();
+    
+    Raquete* getUltima(){return ultima;}
+    
+    void setPoderes(Poderes* p){
+        poderes.push_back(p);
+    }
     
     
     
