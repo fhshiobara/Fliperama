@@ -19,6 +19,7 @@ protected:
     CoordF tamanho;
     short int id;
     bool ativo;
+    bool foiAtivado;
 public:
     Poderes();
     virtual ~Poderes();
@@ -28,7 +29,12 @@ public:
     void setAtivo(bool a){ativo = a;}
     bool getAtivo(){return ativo;}
     
+    void setFoiAtivado(bool a){foiAtivado = a;}
+    bool getFoiAtivado(){return foiAtivado;}
+    
     virtual void executar(Bola* bola)=0;
+    
+    void checarPoder();
     
     
 };

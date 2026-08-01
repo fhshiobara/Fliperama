@@ -7,7 +7,7 @@
 
 #include "Pong.hpp"
 
-Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL){
+Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),dt(0.f){
     R1 = new Raquete(CoordF(5.f,5.f), CoordF(20.f,100.f));
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
@@ -28,10 +28,16 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
         txtG1.setFillColor(sf::Color::White);
         txtG1.setPosition(1280.f/2.f - 80.f, 20.f);
         
+        
         txtG2.setFont(*fonte);
         txtG2.setCharacterSize(48);
         txtG2.setFillColor(sf::Color::White);
         txtG2.setPosition(1280.f/2.f + 40.f, 20.f);
+        
+        txtDt.setFont(*fonte);
+        txtDt.setCharacterSize(48);
+        txtDt.setFillColor(sf::Color::White);
+        txtDt.setPosition(50.f, 20.f);
     }
     
     
@@ -105,6 +111,7 @@ void Pong::executar(){
                 if(event.key.code == sf::Keyboard::Down) R2->moveBaixo = false;
             }
         }
+        dt = dt+1;
         pGG->clear();
         
 
@@ -116,6 +123,7 @@ void Pong::executar(){
         bola->tratarColisaoGol();
         txtG1.setString(std::to_string(G1->getPontos()));
         txtG2.setString(std::to_string(G2->getPontos()));
+        txtDt.setString(std::to_string(dt));
         
         pGG->render(pV->getSprite());
         pGG->render(&txtG1);
@@ -123,6 +131,7 @@ void Pong::executar(){
         pGG->render(R1->getSprite());
         pGG->render(R2->getSprite());
         pGG->render(bola->getSprite());
+        pGG->render(&txtDt);
         
         if(G1->getPontos()==5||G2->getPontos()==5){
             pGG->closeWindow();

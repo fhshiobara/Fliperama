@@ -121,11 +121,11 @@ void Bola::tratarColisaoRaquete(){
             
             if(this->getPos().x<640){
                 ultimo = 1;
-                sprite->setFillColor(sf::Color::Blue);
+                //sprite->setFillColor(sf::Color::Blue);
             }
             else if(this->getPos().x>640){
                 ultimo = 2;
-                sprite->setFillColor(sf::Color::Red);
+                //sprite->setFillColor(sf::Color::Red);
             }
             ultima = (*it);
             atualizarSprite();
@@ -197,6 +197,8 @@ void Bola::tratarColisaoPoderes(){
             
             (*p)->executar(this);   // dispara o efeito do poder
             (*p)->setAtivo(true);
+            (*p)->setFoiAtivado(true);
+            
             break; // apenas um poder ativado por frame
         }
     }

@@ -27,6 +27,9 @@ protected:
     Gerenciadores::GerenciadorGrafico* pGG;
     sf::Text txtG1;
     sf::Text txtG2;
+    sf::Text txtDt;
+    
+    int dt;
     
 public:
     Pong();
