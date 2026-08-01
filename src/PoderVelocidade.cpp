@@ -9,6 +9,7 @@
 
 
 PoderVelocidade::PoderVelocidade():multiplicador(1.5){
+    id = 1;
     sprite = new sf::RectangleShape;
     sprite->setSize(sf::Vector2f(tamanho.x,tamanho.y));
     sprite->setOrigin(sf::Vector2f(pos.x,pos.y));
@@ -19,5 +20,9 @@ PoderVelocidade::~PoderVelocidade(){}
 
 float PoderVelocidade::getMult(){
     return multiplicador;
+}
+
+void PoderVelocidade::executar(Bola* bola){
+    bola->setVelocidade(CoordF(bola->getVelocidade().x*multiplicador,bola->getVelocidade().y*multiplicador));
 }
 

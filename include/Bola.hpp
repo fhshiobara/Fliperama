@@ -16,18 +16,24 @@
 #include "Gol.hpp"
 
 
+class Poderes;
 class Bola:public Entidade{
 protected:
     float raio;
     CoordF velocidade;
     CoordF velocidadePadrao;
+    short int ultimo;
     sf::CircleShape* sprite;
     
     std::vector<Raquete*> raquetes;
     std::vector<Raquete*>::iterator it;
     
+    
     std::vector<Gol*> gols;
     std::vector<Gol*>::iterator i;
+    
+    std::vector<Poderes*> poderes;
+    std::vector<Poderes*>::iterator p;
     
     CoordF tamJanela;
     void atualizarSprite();
@@ -57,6 +63,8 @@ public:
     void tratarColisaoGol();
     
     CoordF getVelocidadePadrao(){return velocidadePadrao;}
+    
+    void tratarColisaoPoderes();
     
     
     

@@ -18,6 +18,7 @@ public:
     PoderVelocidade();
     ~PoderVelocidade();
     float getMult();
+    void executar(Bola* bola);
     
 };
 

@@ -7,12 +7,13 @@
 
 #include "Pong.hpp"
 
-Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL){
+Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL){
     R1 = new Raquete(CoordF(5.f,5.f), CoordF(20.f,100.f));
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
     G2 = new Gol(CoordF(0.f,0.f));
     bola = new Bola(CoordF(10.f,05.f),8.f);
+    pV = new PoderVelocidade();
     bola->setTamJanela(CoordF(1280.f,720.f));
     bola->setRaquete(R1);
     bola->setRaquete(R2);

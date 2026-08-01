@@ -13,6 +13,7 @@
 #include "GerenciadorGrafico.hpp"
 #include "Raquete.hpp"
 #include "Gol.hpp"
+#include "PoderVelocidade.hpp"
 
 
 class Pong{
@@ -22,6 +23,7 @@ protected:
     Bola* bola;
     Gol* G1;
     Gol* G2;
+    PoderVelocidade* pV;
     Gerenciadores::GerenciadorGrafico* pGG;
     sf::Text txtG1;
     sf::Text txtG2;

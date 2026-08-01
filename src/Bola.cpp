@@ -7,7 +7,7 @@
 
 #include "Bola.hpp"
 
-Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0.f){
+Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0.f),ultimo(0){
     sprite = new sf::CircleShape;
     sprite->setRadius(raio);
 
@@ -16,6 +16,8 @@ Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0
     it = raquetes.begin();
     gols.clear();
     i = gols.begin();
+    poderes.clear();
+    p = poderes.begin();
     
     velocidadePadrao = velocidade; // a velociade padrao é a que é passada na construtora
 }
@@ -116,6 +118,15 @@ void Bola::tratarColisaoRaquete(){
                     velocidade.y = std::abs(velocidade.y);
                 }
             }
+            
+            if(this->getPos().x<640){
+                ultimo = 1;
+                sprite->setFillColor(sf::Color::Blue);
+            }
+            else if(this->getPos().x>640){
+                ultimo = 2;
+                sprite->setFillColor(sf::Color::Red);
+            }
             atualizarSprite();
             break; // ja resolveu a colisao, nao precisa checar a outra raquete
         }
@@ -150,6 +161,7 @@ void Bola::tratarColisaoGol(){
         if(distanciaQuadrada < raio*raio){
             (*i)->setPontos(1);
 //isso aqui comeca a bolinha direto no meio, vou mudar para que a bolinha tenha um tipo de saque ou sla
+            sprite->setFillColor(sf::Color::White);
             pos.x = tamJanela.x/2.f;
             pos.y = tamJanela.y/2.f;
             velocidade.x = 0.f;
@@ -161,3 +173,19 @@ void Bola::tratarColisaoGol(){
         }
     }
 }
+/*
+void Bola::tratarColisaoPoderes(){
+    float esquerda = posRetangulo.x;
+    float direita  = posRetangulo.x + tamanhoRetangulo.x;
+    float topo     = posRetangulo.y;
+    float base     = posRetangulo.y + tamanhoRetangulo.y;
+
+    float pontoX = std::max(esquerda, std::min(centroCirculo.x, direita));
+    float pontoY = std::max(topo, std::min(centroCirculo.y, base));
+
+    float difX = centroCirculo.x - pontoX;
+    float difY = centroCirculo.y - pontoY;
+
+    colidiu = (difX*difX + difY*difY) < raio*raio;
+}
+*/
