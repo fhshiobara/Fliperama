@@ -16,13 +16,15 @@ protected:
     CoordF tamanho;
     int pontos;
 public:
-    Gol();
+    Gol(CoordF pos);
     ~Gol();
     
     void setPontos(int p);
     int getPontos();
     
     void setTamanho(CoordF t);
+    
+    CoordF getTamanho(){return tamanho;}
     
 };
 

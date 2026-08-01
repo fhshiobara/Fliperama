@@ -7,7 +7,9 @@
 
 #include "Gol.hpp"
 
-Gol::Gol():tamanho(CoordF(25,720)),pontos(0){}
+Gol::Gol(CoordF pos):tamanho(CoordF(25,720)),pontos(0){
+    this->Entidade::setPos(pos);
+}
 
 Gol::~Gol(){}
 

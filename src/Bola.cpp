@@ -14,6 +14,8 @@ Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0
     sprite->setFillColor(sf::Color::White);
     raquetes.clear();
     it = raquetes.begin();
+    gols.clear();
+    i = gols.begin();
 }
 
 Bola::~Bola(){
@@ -117,4 +119,44 @@ void Bola::tratarColisaoRaquete(){
         }
     }
     atualizarSprite();
+}
+
+void Bola::setGol(Gol* g){
+    gols.push_back(g);
+}
+
+void Bola::tratarColisaoGol(){
+    for(i=gols.begin(); i!=gols.end(); i++){
+        CoordF tamanho = (*i)->getTamanho();
+        float largura = tamanho.x;
+        float altura = tamanho.y;
+
+        CoordF posGol = (*i)->getPos();
+
+        float esquerda = posGol.x;
+        float direita  = posGol.x + largura;
+        float topo     = posGol.y;
+        float base     = posGol.y + altura;
+
+        float pontoX = std::max(esquerda, std::min(pos.x, direita));
+        float pontoY = std::max(topo, std::min(pos.y, base));
+
+        float difX = pos.x - pontoX;
+        float difY = pos.y - pontoY;
+
+        float distanciaQuadrada = difX*difX + difY*difY;
+
+        if(distanciaQuadrada < raio*raio){
+            (*i)->setPontos(1);
+
+            pos.x = tamJanela.x/2.f;
+            pos.y = tamJanela.y/2.f;
+
+            velocidade.x = -velocidade.x;
+
+            atualizarSprite();
+
+            break; // evita processar colisao com outro gol no mesmo frame
+        }
+    }
 }

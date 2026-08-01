@@ -13,6 +13,7 @@
 #include "VectorTL.hpp"
 #include "Entidade.hpp"
 #include "Raquete.hpp"
+#include "Gol.hpp"
 
 
 class Bola:public Entidade{
@@ -23,6 +24,9 @@ protected:
     
     std::vector<Raquete*> raquetes;
     std::vector<Raquete*>::iterator it;
+    
+    std::vector<Gol*> gols;
+    std::vector<Gol*>::iterator i;
     
     CoordF tamJanela;
     void atualizarSprite();
@@ -47,6 +51,9 @@ public:
     void tratarColisaoRaquete();
     
     void setPos(CoordF p);
+    
+    void setGol(Gol* g);
+    void tratarColisaoGol();
     
     
     
