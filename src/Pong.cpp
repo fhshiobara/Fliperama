@@ -79,10 +79,19 @@ void Pong::executar(){
                 if(event.key.code == sf::Keyboard::Up)   R2->moveCima = true;
                 if(event.key.code == sf::Keyboard::Down) R2->moveBaixo = true;
                 
+                if(event.key.code == sf::Keyboard::Space){
+                    int aux = rand()%2; // 0 ou 1;
+                    if(aux == 0){
+                        aux = -1;
+                    }
+                    
+                    bola->setVelocidade(CoordF(bola->getVelocidadePadrao().x*aux,bola->getVelocidadePadrao().y*aux));
+                }
+                
                 if(event.key.code == sf::Keyboard::Escape){
                     pGG->closeWindow();//serve apenas para fechar a janela
                 }
-                }
+            }
                     
             if(event.type == sf::Event::KeyReleased){
                 if(event.key.code == sf::Keyboard::W) R1->moveCima = false;
@@ -109,6 +118,10 @@ void Pong::executar(){
         pGG->render(R1->getSprite());
         pGG->render(R2->getSprite());
         pGG->render(bola->getSprite());
+        
+        if(G1->getPontos()==5||G2->getPontos()==5){
+            pGG->closeWindow();
+        }
         
         pGG->display();
     }

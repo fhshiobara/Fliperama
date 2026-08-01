@@ -20,6 +20,7 @@ class Bola:public Entidade{
 protected:
     float raio;
     CoordF velocidade;
+    CoordF velocidadePadrao;
     sf::CircleShape* sprite;
     
     std::vector<Raquete*> raquetes;
@@ -54,6 +55,9 @@ public:
     
     void setGol(Gol* g);
     void tratarColisaoGol();
+    
+    CoordF getVelocidadePadrao(){return velocidadePadrao;}
+    
     
     
     

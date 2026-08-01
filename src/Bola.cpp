@@ -16,6 +16,8 @@ Bola::Bola(CoordF v, float r):velocidade(v),raio(r),sprite(NULL),tamJanela(0.f,0
     it = raquetes.begin();
     gols.clear();
     i = gols.begin();
+    
+    velocidadePadrao = velocidade; // a velociade padrao é a que é passada na construtora
 }
 
 Bola::~Bola(){
@@ -91,11 +93,9 @@ void Bola::tratarColisaoRaquete(){
         float distanciaQuadrada = difX*difX + difY*difY;
 
         if(distanciaQuadrada < raio*raio){
-            float sobreposicaoX = raio - std::abs(difX);
-            float sobreposicaoY = raio - std::abs(difY);
-
-            if(sobreposicaoX < sobreposicaoY){
-                // colisao lateral (esquerda ou direita da raquete)
+            // se o centro da bola esta dentro da faixa vertical da raquete,
+            // a colisao e sempre lateral (essa e a colisao "normal" do Pong)
+            if(pos.y >= topo && pos.y <= base){
                 if(pos.x < posRaquete.x + largura/2.f){
                     pos.x = esquerda - raio;
                     velocidade.x = -std::abs(velocidade.x);
@@ -106,7 +106,7 @@ void Bola::tratarColisaoRaquete(){
                 }
             }
             else{
-                // colisao por cima ou por baixo da raquete
+                // bola bateu genuinamente no canto (topo ou base) da raquete
                 if(pos.y < posRaquete.y + altura/2.f){
                     pos.y = topo - raio;
                     velocidade.y = -std::abs(velocidade.y);
@@ -116,9 +116,10 @@ void Bola::tratarColisaoRaquete(){
                     velocidade.y = std::abs(velocidade.y);
                 }
             }
+            atualizarSprite();
+            break; // ja resolveu a colisao, nao precisa checar a outra raquete
         }
     }
-    atualizarSprite();
 }
 
 void Bola::setGol(Gol* g){
@@ -148,11 +149,11 @@ void Bola::tratarColisaoGol(){
 
         if(distanciaQuadrada < raio*raio){
             (*i)->setPontos(1);
-
+//isso aqui comeca a bolinha direto no meio, vou mudar para que a bolinha tenha um tipo de saque ou sla
             pos.x = tamJanela.x/2.f;
             pos.y = tamJanela.y/2.f;
-
-            velocidade.x = -velocidade.x;
+            velocidade.x = 0.f;
+            velocidade.y = 0.f;
 
             atualizarSprite();
 
