@@ -55,6 +55,7 @@ set(SOURCES
     src/Pong.cpp
     src/GerenciadorGrafico.cpp
     src/Gol.cpp
+    src/Poderes.cpp
     
     # Adicione novos arquivos .cpp aqui embaixo quando criá-los
 )
