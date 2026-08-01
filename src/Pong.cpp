@@ -8,9 +8,15 @@
 #include "Pong.hpp"
 
 Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()){
-    R1 = new Raquete(CoordF(5.f,5.f), CoordF(30.f,20.f));
-    R2 = new Raquete(CoordF(5.f,5.f), CoordF (30.f,20.f));
-    bola = new Bola(CoordF(10.f,10.f),30.f);
+    R1 = new Raquete(CoordF(5.f,5.f), CoordF(20.f,100.f));
+    R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
+    bola = new Bola(CoordF(10.f,05.f),8.f);
+    bola->setTamJanela(CoordF(1280.f,720.f));
+    bola->setRaquete(R1);
+    bola->setRaquete(R2);
+    this->setPosInicial();
+    
+    
 }
 
 Pong::~Pong(){
@@ -33,6 +39,12 @@ Pong::~Pong(){
     
 }
 
+void Pong::setPosInicial(){
+    R1->setPos(CoordF(65.f,360.f));
+    R2->setPos(CoordF(1200.f,360.f));
+    bola->setPos(CoordF(85.f,300.f));
+}
+
 void Pong::executar(){
     sf::Event event;
     
@@ -41,6 +53,26 @@ void Pong::executar(){
         while(pGG->getWindow()->pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 pGG->closeWindow();
+            }
+                    
+            if(event.type == sf::Event::KeyPressed){
+                if(event.key.code == sf::Keyboard::W) R1->moveCima = true;
+                if(event.key.code == sf::Keyboard::S) R1->moveBaixo = true;
+                        //----
+                if(event.key.code == sf::Keyboard::Up)   R2->moveCima = true;
+                if(event.key.code == sf::Keyboard::Down) R2->moveBaixo = true;
+                
+                if(event.key.code == sf::Keyboard::Escape){
+                    pGG->closeWindow();//serve apenas para fechar a janela
+                }
+                }
+                    
+            if(event.type == sf::Event::KeyReleased){
+                if(event.key.code == sf::Keyboard::W) R1->moveCima = false;
+                if(event.key.code == sf::Keyboard::S) R1->moveBaixo = false;
+                        //------
+                if(event.key.code == sf::Keyboard::Up)   R2->moveCima = false;
+                if(event.key.code == sf::Keyboard::Down) R2->moveBaixo = false;
             }
         }
         pGG->clear();

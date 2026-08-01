@@ -25,6 +25,7 @@ protected:
     std::vector<Raquete*>::iterator it;
     
     CoordF tamJanela;
+    void atualizarSprite();
 public:
     Bola(CoordF v, float r);
     ~Bola();
@@ -44,6 +45,10 @@ public:
     
     void setRaquete(Raquete* r);
     void tratarColisaoRaquete();
+    
+    void setPos(CoordF p);
+    
+    
     
     sf::CircleShape* getSprite(){
         return sprite;

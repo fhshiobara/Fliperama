@@ -27,6 +27,14 @@ void Bola::mover(){
     pos.x = pos.x+velocidade.x;
     
     pos.y = pos.y+velocidade.y;
+    
+    atualizarSprite();
+}
+
+void Bola::atualizarSprite(){
+    if(sprite!=NULL){
+        sprite->setPosition(pos.x-raio,pos.y-raio);
+    }
 }
 
 void Bola::tratarColisaoParede(){
@@ -47,11 +55,16 @@ void Bola::tratarColisaoParede(){
         pos.y = tamJanela.y-raio;
         velocidade.y = -std::abs(velocidade.y);
     }
+    atualizarSprite();
     
 }
 
 void Bola::setRaquete(Raquete* r){
     raquetes.push_back(r);
+}
+void Bola::setPos(CoordF p){
+    Entidade::setPos(p);
+    atualizarSprite();
 }
 
 void Bola::tratarColisaoRaquete(){
@@ -103,4 +116,5 @@ void Bola::tratarColisaoRaquete(){
             }
         }
     }
+    atualizarSprite();
 }

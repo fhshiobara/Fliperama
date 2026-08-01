@@ -19,8 +19,8 @@ namespace Gerenciadores{
 
     GerenciadorGrafico::GerenciadorGrafico() {
         
-            window = new sf::RenderWindow(sf::VideoMode(800, 600), "Gerenciador Grafico");
-            window->setFramerateLimit(100);
+            window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Gerenciador Grafico");
+            window->setFramerateLimit(60);
         }
 
     GerenciadorGrafico::~GerenciadorGrafico(){

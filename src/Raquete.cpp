@@ -13,7 +13,7 @@ Raquete::Raquete(CoordF v,CoordF t):velocidade(v),tamanho(t),sprite(NULL),moveDi
     if(sprite!=NULL){
         sprite->setSize(sf::Vector2f(tamanho.x,tamanho.y));
         sprite->setPosition(pos.x,pos.y);
-        sprite->setFillColor(sf::Color::Green);
+        sprite->setFillColor(sf::Color::White);
         
     }else{
         std::cout<<"ERRO NA ALOCACAO DO RECTANGLESHAPE EM RAQUETE"<<std::endl;
@@ -36,19 +36,25 @@ void Raquete::setSize(CoordF t){
 
 CoordF Raquete::getSize(){return tamanho;}
 
+void Raquete::setPos(CoordF p){
+    Entidade::setPos(p);
+    if(sprite!=NULL) sprite->setPosition(pos.x, pos.y);
+}
 
 void Raquete::mover(){
     if(moveCima){
-        pos.y = pos.y-velocidade.y;
+        pos.y = pos.y - velocidade.y;
     }
     if(moveBaixo){
-        pos.y = pos.y=velocidade.y;
+        pos.y = pos.y + velocidade.y;
     }
     if(moveEsq){
-        pos.x = pos.x-velocidade.x;
+        pos.x = pos.x - velocidade.x;
     }
     if(moveDir){
-        pos.x = pos.x +velocidade.x;
+        pos.x = pos.x + velocidade.x;
     }
     
+    if(sprite!=NULL) sprite->setPosition(pos.x, pos.y); // sincroniza aqui
 }
+

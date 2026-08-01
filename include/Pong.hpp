@@ -24,6 +24,8 @@ public:
     Pong();
     ~Pong();
     
+    void setPosInicial();
+    
     void executar();
     
     

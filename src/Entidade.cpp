@@ -12,6 +12,9 @@ Entidade::Entidade():pos(0.f,0.f){}
 
 Entidade::~Entidade(){};
 
-void Entidade::setPos(CoordF p){pos = p;}
+void Entidade::setPos(CoordF p){
+    pos.x = p.x;
+    pos.y = p.y;
+}
 
 CoordF Entidade::getPos(){return pos;}

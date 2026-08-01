@@ -9,6 +9,8 @@
 #include <SFML/Graphics.hpp>
 #include "Entidade.hpp"
 
+#ifndef Raquete_hpp
+#define Raquete_hpp
 
 class Raquete:public Entidade{
 protected:
@@ -32,8 +34,12 @@ public://deixei os bools public para poder alterar eles direto da janela do jogo
     
     void mover();
     
+    void setPos(CoordF p);
+    
     sf::RectangleShape* getSprite(){
         return sprite;
     }
     
 };
+
+#endif

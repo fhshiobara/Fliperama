@@ -16,8 +16,8 @@ protected:
     CoordF pos;
 public:
     Entidade();
-    ~Entidade();
-    void setPos(CoordF p);
+    virtual ~Entidade();
+    virtual void setPos(CoordF p);
     CoordF getPos();
 };
 
