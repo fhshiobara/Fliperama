@@ -14,6 +14,7 @@
 #include "Raquete.hpp"
 #include "Gol.hpp"
 #include "PoderVelocidade.hpp"
+#include "PoderTamanho.hpp"
 
 
 class Pong{
@@ -24,10 +25,13 @@ protected:
     Gol* G1;
     Gol* G2;
     PoderVelocidade* pV;
+    PoderTamanho* pT;
     Gerenciadores::GerenciadorGrafico* pGG;
     sf::Text txtG1;
     sf::Text txtG2;
     sf::Text txtDt;
+    sf::Text txtPoderes;
+    sf::Text txtPoderes2;
     
     int dt;
     

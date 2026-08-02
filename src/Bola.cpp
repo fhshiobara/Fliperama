@@ -208,3 +208,12 @@ void Bola::atualizarPoderes(){
     }
     
 }
+
+bool Bola::verificaPoderes(int id){
+    for(p=poderes.begin();p!=poderes.end();p++){
+        if((*p)->getId()==id){
+            return true;
+        }
+    }
+    return false;
+}

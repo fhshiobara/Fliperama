@@ -76,6 +76,8 @@ public:
         poderes.push_back(p);
     }
     
+    bool verificaPoderes(int id);
+    
     
     
     

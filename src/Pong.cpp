@@ -7,8 +7,8 @@
 
 #include "Pong.hpp"
 
-Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),dt(0){
-    R1 = new Raquete(CoordF(5.f,5.f), CoordF(20.f,100.f));
+Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),pT(NULL),dt(0){
+    R1 = new Raquete(CoordF(5.f,5.f), CoordF(25.f,100.f));
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
     G2 = new Gol(CoordF(0.f,0.f));
@@ -19,6 +19,9 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
     bola->setRaquete(R2);
     bola->setGol(G1);
     bola->setGol(G2);
+    
+    txtPoderes.setString("?");
+    txtPoderes2.setString("?");
     
     
     this->setPosInicial();
@@ -40,6 +43,8 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
         txtDt.setCharacterSize(48);
         txtDt.setFillColor(sf::Color::White);
         txtDt.setPosition(50.f, 20.f);
+        
+        
     }
     
     
@@ -58,9 +63,25 @@ Pong::~Pong(){
         delete bola;
         bola = NULL;
     }
+    if(G1!=NULL){
+        delete G1;
+        G1 = NULL;
+    }
+    if(G2!=NULL){
+        delete G2;
+        G2 = NULL;
+    }
     if(pGG!=NULL){
         delete pGG;
         pGG = NULL;
+    }
+    if(pV!=NULL){
+        delete pV;
+        pV = NULL;
+    }
+    if(pT!=NULL){
+        delete pT;
+        pT = NULL;
     }
     
 }
@@ -120,15 +141,49 @@ void Pong::executar(){
         }
         dt = dt+1;
         
-        if(dt==500 || dt ==1500||dt==3000){
-            pV = new PoderVelocidade;
-            int auxX = (rand()%400)-200;
-            int auxY = (rand()%400)-200;
-            pV->setTamanho(CoordF(100.f,100.f));
-            
-            
-            pV->setPos(CoordF(640.f+auxX,360.f-auxY));
-            bola->setPoderes(pV);
+        if(dt%501==0){
+            int aux = rand()%2;
+            if(aux ==1){
+                pV = new PoderVelocidade;
+                int auxX = (rand()%400)-200;
+                int auxY = (rand()%400)-200;
+                pV->setTamanho(CoordF(70.f,70.f));
+                
+                
+                pV->setPos(CoordF(640.f+auxX,360.f-auxY));
+                bola->setPoderes(pV);
+                sf::Font* fonte = pGG->getFont();
+                if(fonte != NULL){
+                    txtPoderes.setFont(*fonte);
+                    txtPoderes.setCharacterSize(48);
+                    txtPoderes.setFillColor(sf::Color::White);
+                    //nao tenho a menor ideia de porque isso nao esta funcionando, vou fazer no pelo mais uma vez
+                    //txtPoderes.setPosition(pT->getPos().x+(pT->getTamanho().x)/2, pT->getPos().y-(pT->getTamanho().y)/2);
+                    txtPoderes.setPosition(pV->getPos().x+(pV->getTamanho().x-16)/2,pV->getPos().y);
+                }
+                
+            }
+            else if(aux==0){
+                    pT = new PoderTamanho;
+                    int auxX = (rand()%400)-200;
+                    int auxY = (rand()%400)-200;
+                    pT->setTamanho(CoordF(70.f,70.f));
+                    pT->setPos(CoordF(640.f+auxX,360.f-auxY));
+                    bola->setPoderes(pT);
+                    
+                    sf::Font* fonte = pGG->getFont();
+                    if(fonte != NULL){
+                        txtPoderes2.setFont(*fonte);
+                        txtPoderes2.setCharacterSize(48);
+                        txtPoderes2.setFillColor(sf::Color::White);
+                        //nao tenho a menor ideia de porque isso nao esta funcionando, vou fazer no pelo mais uma vez
+                        //txtPoderes.setPosition(pT->getPos().x+(pT->getTamanho().x)/2, pT->getPos().y-(pT->getTamanho().y)/2);
+                        txtPoderes2.setPosition(pT->getPos().x+(pT->getTamanho().x-16)/2,pT->getPos().y);
+                    }
+                    
+                    
+                
+            }
             
         }
         pGG->clear();
@@ -148,6 +203,13 @@ void Pong::executar(){
         if(pV!=NULL){
             if(!pV->getFoiAtivado()){
                 pGG->render(pV->getSprite());
+                pGG->render(&txtPoderes);
+            }
+        }
+        if(pT!=NULL){
+            if(!pT->getFoiAtivado()){
+                pGG->render(pT->getSprite());
+                pGG->render(&txtPoderes2);
             }
         }
         pGG->render(&txtG1);

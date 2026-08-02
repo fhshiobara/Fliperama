@@ -35,7 +35,9 @@ void PoderTamanho::executar(Bola* bola){
 void PoderTamanho::desativar(Bola* bola){
     if(afetada!=NULL){
         CoordF tamanho = afetada->getSize();
-        afetada->setSize(CoordF(tamanho.x/multiplicador,tamanho.y/multiplicador));
+        //essa funcao abaixo seria o certo mas vou fazer no pelo pq deu bug
+        //afetada->setSize(CoordF(tamanho.x/multiplicador,tamanho.y/multiplicador));
+        afetada->setSize(CoordF(25.f,100.f));
         afetada->setColor(sf::Color::White);
         afetada = NULL;
     }

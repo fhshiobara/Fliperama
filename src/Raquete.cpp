@@ -43,10 +43,14 @@ void Raquete::setPos(CoordF p){
 
 void Raquete::mover(){
     if(moveCima){
-        pos.y = pos.y - velocidade.y;
+        if(pos.y>0){
+            pos.y = pos.y - velocidade.y;
+        }
     }
     if(moveBaixo){
-        pos.y = pos.y + velocidade.y;
+        if(pos.y+tamanho.y<720){
+            pos.y = pos.y + velocidade.y;
+        }
     }
     if(moveEsq){
         pos.x = pos.x - velocidade.x;

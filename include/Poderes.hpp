@@ -46,6 +46,8 @@ public:
     
     void checarPoder();
     
+    int getId(){return id;}
+    
     
     
     
