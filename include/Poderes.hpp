@@ -27,7 +27,7 @@ public:
     Poderes();
     virtual ~Poderes();
     
-    void setTamanho(CoordF t){tamanho = t;}
+    virtual void setTamanho(CoordF t){tamanho = t;}
     CoordF getTamanho(){return tamanho;}
     void setAtivo(bool a){ativo = a;}
     bool getAtivo(){return ativo;}

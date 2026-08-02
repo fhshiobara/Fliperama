@@ -7,7 +7,7 @@
 
 #include "Poderes.hpp"
 
-Poderes::Poderes():sprite(NULL),tamanho(CoordF(50.f,50.f)),id(0),ativo(false),foiAtivado(false){}
+Poderes::Poderes():sprite(NULL),tamanho(CoordF(50.f,50.f)),id(0),ativo(false),foiAtivado(false),duracaoFrames(300),tempoRestante(0){}
 
 Poderes::~Poderes(){
     ativo = false;

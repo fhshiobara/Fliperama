@@ -7,7 +7,7 @@
 
 #include "Pong.hpp"
 
-Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),dt(0.f){
+Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),dt(0){
     R1 = new Raquete(CoordF(5.f,5.f), CoordF(20.f,100.f));
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
@@ -67,6 +67,8 @@ void Pong::setPosInicial(){
     R1->setPos(CoordF(85.f,360.f));
     R2->setPos(CoordF(1180.f,360.f));
     bola->setPos(CoordF(85.f,300.f));
+    
+    pV->setTamanho(CoordF(100.f,100.f));
     pV->setPos(CoordF(640.f,360.f));
 }
 

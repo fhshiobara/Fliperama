@@ -22,6 +22,7 @@ public:
     void executar(Bola* bola);
     void desativar(Bola* bola);
     void setPos(CoordF p);
+    void setTamanho(CoordF t);
     
     sf::RectangleShape* getSprite(){return sprite;}
     

@@ -27,7 +27,6 @@ void PoderVelocidade::executar(Bola* bola){
     if(afetada != NULL){
         CoordF vAtual = afetada->getVelocidade();
         afetada->setVelocidade(CoordF(vAtual.x*multiplicador, vAtual.y*multiplicador));
-        afetada = NULL;
         
     }
 }
@@ -44,4 +43,11 @@ void PoderVelocidade::desativar(Bola* bola){
 void PoderVelocidade::setPos(CoordF p){
     Entidade::setPos(p);
     if(sprite!=NULL) sprite->setPosition(pos.x, pos.y);
+}
+
+void PoderVelocidade::setTamanho(CoordF t){
+    Poderes::setTamanho(t);
+    if(sprite!=NULL){
+        sprite->setSize(sf::Vector2f(t.x,t.y));
+    }
 }
