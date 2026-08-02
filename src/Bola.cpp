@@ -195,11 +195,16 @@ void Bola::tratarColisaoPoderes(){
 
         if(distanciaQuadrada < raio*raio){
             
-            (*p)->executar(this);   // dispara o efeito do poder
-            (*p)->setAtivo(true);
-            (*p)->setFoiAtivado(true);
+            (*p)->ativarPoder(this);
             
             break; // apenas um poder ativado por frame
         }
     }
+}
+
+void Bola::atualizarPoderes(){
+    for(p=poderes.begin();p!=poderes.end();p++){
+        (*p)->atualizar(this);
+    }
+    
 }

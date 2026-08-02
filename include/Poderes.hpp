@@ -20,6 +20,9 @@ protected:
     short int id;
     bool ativo;
     bool foiAtivado;
+    
+    int duracaoFrames;
+    int tempoRestante;
 public:
     Poderes();
     virtual ~Poderes();
@@ -33,8 +36,17 @@ public:
     bool getFoiAtivado(){return foiAtivado;}
     
     virtual void executar(Bola* bola)=0;
+    virtual void desativar(Bola* bola)=0;
+    
+    void ativarPoder(Bola* bola);
+    void atualizar(Bola* bola);
+    
+    void setDuracao(int d){duracaoFrames = d;}
+    int getDuracao(){return duracaoFrames;}
     
     void checarPoder();
+    
+    
     
     
 };

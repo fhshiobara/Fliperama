@@ -14,11 +14,13 @@
 class PoderVelocidade:public Poderes{
 protected:
     float multiplicador;
+    Raquete* afetada;
 public:
     PoderVelocidade();
     ~PoderVelocidade();
     float getMult();
     void executar(Bola* bola);
+    void desativar(Bola* bola);
     void setPos(CoordF p);
     
     sf::RectangleShape* getSprite(){return sprite;}

@@ -22,3 +22,25 @@ void Poderes::checarPoder(){
         delete this;
     }
 }
+
+void Poderes::ativarPoder(Bola* bola){
+    if(foiAtivado){
+        return;
+    }
+    executar(bola);
+    ativo = true;
+    foiAtivado = true;
+    tempoRestante = duracaoFrames;
+}
+
+void Poderes::atualizar(Bola* bola){
+    if(!ativo){
+        return;
+    }
+    tempoRestante--;
+    if(tempoRestante<=0){
+        desativar(bola);
+        ativo = false;
+    }
+}
+

@@ -120,12 +120,16 @@ void Pong::executar(){
         bola->mover();
         bola->tratarColisaoParede();
         bola->tratarColisaoRaquete();
+        bola->tratarColisaoPoderes();
         bola->tratarColisaoGol();
+        bola->atualizarPoderes();
         txtG1.setString(std::to_string(G1->getPontos()));
         txtG2.setString(std::to_string(G2->getPontos()));
         txtDt.setString(std::to_string(dt));
         
-        pGG->render(pV->getSprite());
+        if(!pV->getFoiAtivado()){
+            pGG->render(pV->getSprite());
+        }
         pGG->render(&txtG1);
         pGG->render(&txtG2);
         pGG->render(R1->getSprite());

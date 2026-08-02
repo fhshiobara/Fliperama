@@ -70,6 +70,7 @@ public:
     void tratarColisaoPoderes();
     
     Raquete* getUltima(){return ultima;}
+    void atualizarPoderes();
     
     void setPoderes(Poderes* p){
         poderes.push_back(p);

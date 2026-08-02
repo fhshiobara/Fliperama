@@ -8,7 +8,7 @@
 #include "PoderVelocidade.hpp"
 
 
-PoderVelocidade::PoderVelocidade():multiplicador(1.5){
+PoderVelocidade::PoderVelocidade():multiplicador(1.5),afetada(NULL){
     id = 1;
     sprite = new sf::RectangleShape;
     sprite->setSize(sf::Vector2f(tamanho.x,tamanho.y));
@@ -23,11 +23,22 @@ float PoderVelocidade::getMult(){
 }
 
 void PoderVelocidade::executar(Bola* bola){
-    Raquete* r = bola->getUltima();
-    if(r != NULL){
-        CoordF vAtual = r->getVelocidade();
-        r->setVelocidade(CoordF(vAtual.x*multiplicador, vAtual.y*multiplicador));
+    afetada = bola->getUltima();
+    if(afetada != NULL){
+        CoordF vAtual = afetada->getVelocidade();
+        afetada->setVelocidade(CoordF(vAtual.x*multiplicador, vAtual.y*multiplicador));
+        afetada = NULL;
+        
     }
+}
+
+void PoderVelocidade::desativar(Bola* bola){
+    if(afetada!=NULL){
+        CoordF vAtual = afetada->getVelocidade();
+        afetada->setVelocidade(CoordF(vAtual.x/multiplicador, vAtual.y/multiplicador)); 
+        afetada = NULL;
+    }
+    
 }
 
 void PoderVelocidade::setPos(CoordF p){
