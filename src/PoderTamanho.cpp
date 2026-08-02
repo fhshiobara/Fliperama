@@ -27,7 +27,7 @@ void PoderTamanho::executar(Bola* bola){
     afetada = bola->getUltima();
     if(afetada!=NULL){
         CoordF tamanho = afetada->getSize();
-        afetada->setSize(CoordF(tamanho.x*multiplicador,tamanho.y*multiplicador));
+        afetada->setSize(CoordF(tamanho.x,tamanho.y*multiplicador));
         afetada->setColor(sf::Color::Blue);
     }
 }

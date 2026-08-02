@@ -32,11 +32,10 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
                           "Aperte espaco para lancar a bola. Fique de olho nos poderes\n"
                           "que aparecem na tela - eles podem mudar sua velocidade ou\n"
                           "o tamanho da sua raquete!\n\n"
+                          "O tempo de jogo sera mostrado no canto superior esquerdo \n\n\n"
                           "Boa sorte, e que venca o melhor.\n\n"
                           "Pressione ENTER para comecar");
-    sf::FloatRect bounds = txtTutorial.getLocalBounds();
-            txtTutorial.setOrigin(bounds.left+bounds.width/2.f, bounds.top + bounds.height/2.f);
-            txtTutorial.setPosition(1280.f/2.f, 720.f/2.f);
+    
     
     
     this->setPosInicial();
@@ -58,6 +57,13 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
         txtDt.setCharacterSize(48);
         txtDt.setFillColor(sf::Color::White);
         txtDt.setPosition(50.f, 20.f);
+        
+        txtTutorial.setFont(*fonte);
+        txtTutorial.setCharacterSize(30);
+        txtTutorial.setFillColor(sf::Color::White);
+        sf::FloatRect bounds = txtTutorial.getLocalBounds();
+                txtTutorial.setOrigin(bounds.left+bounds.width/2.f, bounds.top + bounds.height/2.f);
+                txtTutorial.setPosition(1280.f/2.f, 720.f/2.f);
         
     }
     
@@ -215,7 +221,7 @@ void Pong::executar(){
         bola->atualizarPoderes();
         txtG1.setString(std::to_string(G1->getPontos()));
         txtG2.setString(std::to_string(G2->getPontos()));
-        txtDt.setString(std::to_string(dt));
+        txtDt.setString(std::to_string(dt/60));
         if(pV!=NULL){
             if(!pV->getFoiAtivado()){
                 pGG->render(pV->getSprite());
