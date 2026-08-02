@@ -72,9 +72,7 @@ public:
     Raquete* getUltima(){return ultima;}
     void atualizarPoderes();
     
-    void setPoderes(Poderes* p){
-        poderes.push_back(p);
-    }
+    void setPoderes(Poderes* p);
     
     bool verificaPoderes(int id);
     

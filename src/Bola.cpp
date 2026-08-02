@@ -212,8 +212,21 @@ void Bola::atualizarPoderes(){
 bool Bola::verificaPoderes(int id){
     for(p=poderes.begin();p!=poderes.end();p++){
         if((*p)->getId()==id){
+            if((*p)->getAtivo()){
+                (*p)->desativar(this);
+            }
+            delete *p;          // libera o poder antigo (evita memory leak)
+            poderes.erase(p);   // remove o ponteiro morto do vetor (evita o poder fantasma)
             return true;
+            
         }
     }
     return false;
+}
+
+void Bola::setPoderes(Poderes* p){
+    
+        verificaPoderes(p->getId());
+        poderes.push_back(p);
+    
 }

@@ -22,6 +22,21 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
     
     txtPoderes.setString("?");
     txtPoderes2.setString("?");
+    txtTutorial.setString("Bem-vindo ao Pong!\n\n"
+                          "O objetivo e simples: acerte a bola no gol do seu\n"
+                          "adversario antes que ele acerte o seu. Quem fizer\n"
+                          "5 pontos primeiro, vence!\n\n"
+                          "Controles:\n"
+                          "Raquete da esquerda: W (sobe) e S (desce)\n"
+                          "Raquete da direita: seta para cima (sobe) e seta para baixo (desce)\n\n"
+                          "Aperte espaco para lancar a bola. Fique de olho nos poderes\n"
+                          "que aparecem na tela - eles podem mudar sua velocidade ou\n"
+                          "o tamanho da sua raquete!\n\n"
+                          "Boa sorte, e que venca o melhor.\n\n"
+                          "Pressione ENTER para comecar");
+    sf::FloatRect bounds = txtTutorial.getLocalBounds();
+            txtTutorial.setOrigin(bounds.left+bounds.width/2.f, bounds.top + bounds.height/2.f);
+            txtTutorial.setPosition(1280.f/2.f, 720.f/2.f);
     
     
     this->setPosInicial();
@@ -43,7 +58,6 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
         txtDt.setCharacterSize(48);
         txtDt.setFillColor(sf::Color::White);
         txtDt.setPosition(50.f, 20.f);
-        
         
     }
     
@@ -100,7 +114,7 @@ void Pong::setPosInicial(){
 
 void Pong::executar(){
     sf::Event event;
-    
+    telaTutorial();
     while(pGG->windowopen()){
   
         while(pGG->getWindow()->pollEvent(event)){
@@ -139,7 +153,9 @@ void Pong::executar(){
                 if(event.key.code == sf::Keyboard::Down) R2->moveBaixo = false;
             }
         }
-        dt = dt+1;
+        if(bola->getVelocidade().x!=0.f && bola->getVelocidade().y!=0.f){
+            dt = dt+1;
+        }
         
         if(dt%501==0){
             int aux = rand()%2;
@@ -225,4 +241,25 @@ void Pong::executar(){
         
         pGG->display();
     }
+}
+
+void Pong::telaTutorial(){
+    sf::Event event;
+        bool comecar = false;
+        
+        while(pGG->windowopen() && !comecar){
+            while(pGG->getWindow()->pollEvent(event)){
+                if(event.type == sf::Event::Closed){
+                    pGG->closeWindow();
+                }
+                if(event.type == sf::Event::KeyPressed){
+                    if(event.key.code == sf::Keyboard::Enter){
+                        comecar = true;
+                    }
+                }
+            }
+            pGG->clear();
+            pGG->render(&txtTutorial);
+            pGG->display();
+        }
 }

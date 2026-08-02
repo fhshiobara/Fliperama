@@ -32,6 +32,7 @@ protected:
     sf::Text txtDt;
     sf::Text txtPoderes;
     sf::Text txtPoderes2;
+    sf::Text txtTutorial;
     
     int dt;
     
@@ -42,6 +43,7 @@ public:
     void setPosInicial();
     
     void executar();
+    void telaTutorial();
     
     
 };
