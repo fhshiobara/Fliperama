@@ -19,6 +19,8 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
     bola->setRaquete(R2);
     bola->setGol(G1);
     bola->setGol(G2);
+    
+    bola->setPoderes(pV);
     this->setPosInicial();
     
     sf::Font* fonte = pGG->getFont();
@@ -69,7 +71,14 @@ void Pong::setPosInicial(){
     bola->setPos(CoordF(85.f,300.f));
     
     pV->setTamanho(CoordF(100.f,100.f));
-    pV->setPos(CoordF(640.f,360.f));
+    //preciso aleatorizar a posicao de spawn
+    //a partir do meio ele vai poder spawnar mais ou menos um valor aleatorio
+    //a mesma coisa para cima e para baixo
+    int auxX = (rand()%400)-200;
+    int auxY = (rand()%400)-200;
+    
+    
+    pV->setPos(CoordF(640.f+auxX,360.f-auxY));
 }
 
 void Pong::executar(){

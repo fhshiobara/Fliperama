@@ -27,6 +27,7 @@ void PoderVelocidade::executar(Bola* bola){
     if(afetada != NULL){
         CoordF vAtual = afetada->getVelocidade();
         afetada->setVelocidade(CoordF(vAtual.x*multiplicador, vAtual.y*multiplicador));
+        afetada->setColor(sf::Color::Red);
         
     }
 }
@@ -34,7 +35,8 @@ void PoderVelocidade::executar(Bola* bola){
 void PoderVelocidade::desativar(Bola* bola){
     if(afetada!=NULL){
         CoordF vAtual = afetada->getVelocidade();
-        afetada->setVelocidade(CoordF(vAtual.x/multiplicador, vAtual.y/multiplicador)); 
+        afetada->setVelocidade(CoordF(vAtual.x/multiplicador, vAtual.y/multiplicador));
+        afetada->setColor(sf::Color::White);
         afetada = NULL;
     }
     

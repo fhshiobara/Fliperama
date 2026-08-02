@@ -35,6 +35,12 @@ public://deixei os bools public para poder alterar eles direto da janela do jogo
     void setVelocidade(CoordF v){velocidade = v;}
     CoordF getVelocidade(){return velocidade;}
     
+    void setColor(sf::Color c){
+        if(sprite!=NULL){
+            sprite->setFillColor(c);
+        }
+    }
+    
     void mover();
     
     void setPos(CoordF p);
