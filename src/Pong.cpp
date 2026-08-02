@@ -12,7 +12,7 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
     G2 = new Gol(CoordF(0.f,0.f));
-    pV = new PoderVelocidade;
+    //pV = new PoderVelocidade;
     bola = new Bola(CoordF(10.f,05.f),8.f);
     bola->setTamJanela(CoordF(1280.f,720.f));
     bola->setRaquete(R1);
@@ -20,7 +20,7 @@ Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico:
     bola->setGol(G1);
     bola->setGol(G2);
     
-    bola->setPoderes(pV);
+    
     this->setPosInicial();
     
     sf::Font* fonte = pGG->getFont();
@@ -70,15 +70,11 @@ void Pong::setPosInicial(){
     R2->setPos(CoordF(1180.f,360.f));
     bola->setPos(CoordF(85.f,300.f));
     
-    pV->setTamanho(CoordF(100.f,100.f));
+    
     //preciso aleatorizar a posicao de spawn
     //a partir do meio ele vai poder spawnar mais ou menos um valor aleatorio
     //a mesma coisa para cima e para baixo
-    int auxX = (rand()%400)-200;
-    int auxY = (rand()%400)-200;
     
-    
-    pV->setPos(CoordF(640.f+auxX,360.f-auxY));
 }
 
 void Pong::executar(){
@@ -123,6 +119,18 @@ void Pong::executar(){
             }
         }
         dt = dt+1;
+        
+        if(dt==500 || dt ==1500||dt==3000){
+            pV = new PoderVelocidade;
+            int auxX = (rand()%400)-200;
+            int auxY = (rand()%400)-200;
+            pV->setTamanho(CoordF(100.f,100.f));
+            
+            
+            pV->setPos(CoordF(640.f+auxX,360.f-auxY));
+            bola->setPoderes(pV);
+            
+        }
         pGG->clear();
         
 
@@ -137,9 +145,10 @@ void Pong::executar(){
         txtG1.setString(std::to_string(G1->getPontos()));
         txtG2.setString(std::to_string(G2->getPontos()));
         txtDt.setString(std::to_string(dt));
-        
-        if(!pV->getFoiAtivado()){
-            pGG->render(pV->getSprite());
+        if(pV!=NULL){
+            if(!pV->getFoiAtivado()){
+                pGG->render(pV->getSprite());
+            }
         }
         pGG->render(&txtG1);
         pGG->render(&txtG2);

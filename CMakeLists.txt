@@ -57,6 +57,7 @@ set(SOURCES
     src/Gol.cpp
     src/Poderes.cpp
     src/PoderVelocidade.cpp
+    src/PoderTamanho.cpp
     
     # Adicione novos arquivos .cpp aqui embaixo quando criá-los
 )

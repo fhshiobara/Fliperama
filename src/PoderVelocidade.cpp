@@ -8,7 +8,7 @@
 #include "PoderVelocidade.hpp"
 
 
-PoderVelocidade::PoderVelocidade():multiplicador(1.5),afetada(NULL){
+PoderVelocidade::PoderVelocidade():multiplicador(2.0),afetada(NULL){
     id = 1;
     sprite = new sf::RectangleShape;
     sprite->setSize(sf::Vector2f(tamanho.x,tamanho.y));
@@ -16,7 +16,10 @@ PoderVelocidade::PoderVelocidade():multiplicador(1.5),afetada(NULL){
     sprite->setFillColor(sf::Color::Red);
 }
 
-PoderVelocidade::~PoderVelocidade(){}
+PoderVelocidade::~PoderVelocidade(){
+    if(afetada!=NULL);
+    afetada = NULL;
+}
 
 float PoderVelocidade::getMult(){
     return multiplicador;
