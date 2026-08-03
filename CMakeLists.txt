@@ -60,6 +60,7 @@ set(SOURCES
     src/PoderTamanho.cpp
     
     src/Mapa.cpp
+    src/Tetris.cpp
     
     # Adicione novos arquivos .cpp aqui embaixo quando criá-los
 )
