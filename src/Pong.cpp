@@ -91,10 +91,6 @@ Pong::~Pong(){
         delete G2;
         G2 = NULL;
     }
-    if(pGG!=NULL){
-        delete pGG;
-        pGG = NULL;
-    }
     if(pV!=NULL){
         delete pV;
         pV = NULL;

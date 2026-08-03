@@ -8,7 +8,7 @@
 #include "Mapa.hpp"
 #include "iostream"
 
-Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelula(40){
+Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelula(30),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),correcaoX(0.f),correcaoY(0.f){
     inicializar();
     cores.clear();
     cores = {
@@ -26,6 +26,12 @@ Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelul
     };
     
     it = cores.begin();
+    
+    float larguramax = numCols*tamanhoCelula;
+    float alturamax = numLinhas*tamanhoCelula;
+    correcaoX = (1280.f-larguramax)/2.f;
+    correcaoY = (1280.f-alturamax)/2.f;
+    
 }
 
 Mapa::~Mapa(){}
@@ -52,9 +58,11 @@ void Mapa::draw(){
     for(int linhas=0;linhas<numLinhas;linhas++){
         for(int colunas=0;colunas<numCols;colunas++){
             sf::RectangleShape celula;
-            celula.setSize(sf::Vector2f(tamanhoCelula,tamanhoCelula));
-            celula.setOrigin(linhas*tamanhoCelula,colunas*tamanhoCelula);
+            celula.setSize(sf::Vector2f(tamanhoCelula-1,tamanhoCelula-1));
+            celula.setOrigin(0.f,0.f);
+            celula.setPosition(correcaoX+colunas*tamanhoCelula+1,(linhas*tamanhoCelula)+61);
             celula.setFillColor(getCor(mapa[linhas][colunas]));
+            pGG->render(&celula);
             
         }
         
@@ -68,10 +76,6 @@ sf::Color Mapa::getCor(int id){
         return it->second;
     }
     return cores[0];
-    
-        
-    
-    
 }
 
 

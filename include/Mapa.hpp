@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include "Entidade.hpp"
-#include "SFML/Graphics.hpp"
+#include "GerenciadorGrafico.hpp"
 #include <map>
 
 class Mapa:public Entidade{
@@ -21,6 +21,10 @@ protected:
     int tamanhoCelula;
     std::map <int,sf::Color> cores;
     std::map <int,sf::Color>::iterator it;
+    Gerenciadores::GerenciadorGrafico* pGG;
+    
+    
+    
     
     
 public:
@@ -31,6 +35,9 @@ public:
     void print();
     void draw();
     sf::Color getCor(int id);
+    
+    float correcaoX;
+    float correcaoY;
     
     
     

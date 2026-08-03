@@ -17,6 +17,7 @@ protected:
     Gerenciadores::GerenciadorGrafico* pGG;
     Mapa mapa;
     sf::RectangleShape* fundo;
+    sf::RectangleShape* grid;
 public:
     Tetris();
     ~Tetris();

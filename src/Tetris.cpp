@@ -14,12 +14,23 @@ Tetris::Tetris():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NUL
     fundo->setSize(sf::Vector2f(1280.f,720.f));
     fundo->setFillColor(corFundo);
     
+    grid = new sf::RectangleShape;
+    grid->setOrigin(0.f,0.f);
+    grid->setSize(sf::Vector2f(300,600));
+    grid->setPosition(490.f,61.f);
+    grid->setFillColor(sf::Color(43,26,74));
+    
 }
 
 Tetris::~Tetris(){
-    if(pGG!=NULL){
-        delete pGG;
-        pGG = NULL;
+    if(fundo!=NULL){
+        delete fundo;
+        fundo = NULL;
+        
+    }
+    if(grid!=NULL){
+        delete grid;
+        grid = NULL;
     }
 }
 
@@ -31,19 +42,19 @@ void Tetris::executar(){
             if(event.type == sf::Event::Closed){
                 pGG->closeWindow();
             }
-            
-            pGG->clear();
-            
-            
-            pGG->render(fundo);
-            mapa.print();
-            mapa.draw();
-            
-            
-            pGG->display();
-            
-            //o loop principal vai precisar vir aqui
         }
+        pGG->clear();
+        
+        
+        pGG->render(fundo);
+        //mapa.print();
+        pGG->render(grid);
+        mapa.draw();
+        
+        
+        pGG->display();
+        
+        //o loop principal vai precisar vir aqui
         
         
     }
