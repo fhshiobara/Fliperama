@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include "GerenciadorGrafico.hpp"
 #include "Mapa.hpp"
+#include "Blocos.hpp"
+
 
 class Tetris{
 protected:
@@ -18,6 +20,7 @@ protected:
     Mapa mapa;
     sf::RectangleShape* fundo;
     sf::RectangleShape* grid;
+    BlocoL bloco;
 public:
     Tetris();
     ~Tetris();
@@ -25,5 +28,7 @@ public:
     void executar();
     
 };
+
+
 
 #endif /* Tetris_hpp */

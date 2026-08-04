@@ -21,8 +21,8 @@ Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelul
         {6,sf::Color(160,0,240)}, //roxo
         {7,sf::Color(240,0,0)}, //vermelho
         {10,sf::Color(43,26,74)}, //cor do grid
-        
-        
+     
+   
     };
     
     it = cores.begin();
@@ -30,7 +30,7 @@ Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelul
     float larguramax = numCols*tamanhoCelula;
     float alturamax = numLinhas*tamanhoCelula;
     correcaoX = (1280.f-larguramax)/2.f;
-    correcaoY = (1280.f-alturamax)/2.f;
+    correcaoY = (720.f-alturamax)/2.f;
     
 }
 
@@ -60,7 +60,7 @@ void Mapa::draw(){
             sf::RectangleShape celula;
             celula.setSize(sf::Vector2f(tamanhoCelula-1,tamanhoCelula-1));
             celula.setOrigin(0.f,0.f);
-            celula.setPosition(correcaoX+colunas*tamanhoCelula+1,(linhas*tamanhoCelula)+61);
+            celula.setPosition(correcaoX+colunas*tamanhoCelula+1,(linhas*tamanhoCelula)+1+correcaoY);
             celula.setFillColor(getCor(mapa[linhas][colunas]));
             pGG->render(&celula);
             

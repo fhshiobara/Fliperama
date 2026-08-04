@@ -19,6 +19,12 @@ Tetris::Tetris():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NUL
     grid->setSize(sf::Vector2f(300,600));
     grid->setPosition(490.f,61.f);
     grid->setFillColor(sf::Color(43,26,74));
+    bloco.setEstado(2);
+    bloco.setMapa(&mapa);
+    
+    
+    
+    //mapa.mapa[10][10] = 2;
     
 }
 
@@ -48,9 +54,11 @@ void Tetris::executar(){
         
         pGG->render(fundo);
         //mapa.print();
+        mapa.mapa[5][5] = 2;
         pGG->render(grid);
         mapa.draw();
-        
+        bloco.draw();
+        bloco.setEstado(0);
         
         pGG->display();
         

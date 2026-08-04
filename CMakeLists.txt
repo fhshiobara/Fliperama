@@ -61,6 +61,8 @@ set(SOURCES
     
     src/Mapa.cpp
     src/Tetris.cpp
+    src/Blocos.cpp
+    
     
     # Adicione novos arquivos .cpp aqui embaixo quando criá-los
 )

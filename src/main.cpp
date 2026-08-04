@@ -8,7 +8,6 @@ void sementear(){
 int main(){
     sementear();
     //Pong jogo;
-    
     //jogo.executar();
     
     Tetris tetris;
