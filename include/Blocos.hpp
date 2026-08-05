@@ -37,16 +37,40 @@ public:
 };
 
 
+class BlocoJ:public Blocos{
+public:
+    BlocoJ(){
+        id = 1;
+        cells[0] = {CoordI(5,2),CoordI(6,0),CoordI(6,1),CoordI(6,2)};
+        cells[1] = {CoordI(4,0),CoordI(4,1),CoordI(5,1),CoordI(6,1)};
+        cells[2] = {CoordI(5,0),CoordI(6,0),CoordI(5,1),CoordI(5,2)};
+        cells[3] = {CoordI(4,0),CoordI(5,0),CoordI(6,0),CoordI(6,1)};
+    }
+};
+
+class BlocoQ:public Blocos{
+public:
+    BlocoQ(){
+        id =2;
+        cells[0] = {CoordI(4,0),CoordI(4,1),CoordI(5,0),CoordI(5,1)};
+        cells[1] = {CoordI(4,0),CoordI(4,1),CoordI(5,0),CoordI(5,1)};
+        cells[2] = {CoordI(4,0),CoordI(4,1),CoordI(5,0),CoordI(5,1)};
+        cells[3] = {CoordI(4,0),CoordI(4,1),CoordI(5,0),CoordI(5,1)};
+        
+    }
+};
 class BlocoL:public Blocos{
 public:
     BlocoL(){
-        id = 1;
-        cells[0] = {CoordI(0,2),CoordI(1,0),CoordI(1,1),CoordI(1,2)};
-        cells[1] = {CoordI(0,0),CoordI(0,1),CoordI(1,1),CoordI(2,1)};
-        cells[2] = {CoordI(1,0),CoordI(2,0),CoordI(1,1),CoordI(1,2)};
-        cells[3] = {CoordI(0,1),CoordI(1,1),CoordI(2,1),CoordI(2,2)};
+        id = 3;
+        cells[0] = {CoordI(4,0),CoordI(4,1),CoordI(4,2),CoordI(5,2)};//
+        cells[1] = {CoordI(4,0),CoordI(4,1),CoordI(5,0),CoordI(6,0)};
+        cells[2] = {CoordI(4,0),CoordI(5,0),CoordI(5,1),CoordI(5,2)};
+        cells[3] = {CoordI(4,1),CoordI(5,1),CoordI(6,1),CoordI(6,0)};
     }
 };
+
+
 
 
 #endif /* Blocos_hpp */

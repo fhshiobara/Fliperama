@@ -34,7 +34,7 @@ void Blocos::draw(){
         std::vector<CoordI> tiles = cells[estado];
         std::vector<CoordI>::iterator it;
         for(it = tiles.begin();it!=tiles.end();it++){
-            pM->mapa[it->x][it->y] = id;
+            pM->mapa[it->y][it->x] = id;
         }
     }
 }
