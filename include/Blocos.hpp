@@ -36,14 +36,13 @@ public:
     Mapa* getMapa();
 };
 
-
 class BlocoJ:public Blocos{
 public:
     BlocoJ(){
         id = 1;
-        cells[0] = {CoordI(5,2),CoordI(6,0),CoordI(6,1),CoordI(6,2)};
+        cells[0] = {CoordI(4,2),CoordI(5,0),CoordI(5,1),CoordI(5,2)};
         cells[1] = {CoordI(4,0),CoordI(4,1),CoordI(5,1),CoordI(6,1)};
-        cells[2] = {CoordI(5,0),CoordI(6,0),CoordI(5,1),CoordI(5,2)};
+        cells[2] = {CoordI(4,0),CoordI(5,0),CoordI(4,1),CoordI(4,2)};
         cells[3] = {CoordI(4,0),CoordI(5,0),CoordI(6,0),CoordI(6,1)};
     }
 };
@@ -70,6 +69,49 @@ public:
     }
 };
 
+class BlocoI:public Blocos{
+public:
+    BlocoI(){
+        id = 4;
+        cells[0] = {CoordI(5,0),CoordI(5,1),CoordI(5,2),CoordI(5,3)};
+        cells[1] = {CoordI(3,2),CoordI(4,2),CoordI(5,2),CoordI(6,2)};
+        cells[2] = {CoordI(4,0),CoordI(4,1),CoordI(4,2),CoordI(4,3)};
+        cells[3] = {CoordI(3,1),CoordI(4,1),CoordI(5,1),CoordI(6,1)};
+    }
+};
+
+class BlocoT:public Blocos{
+public:
+    BlocoT(){
+        id = 5;
+        cells[0] = {CoordI(4,1),CoordI(5,0),CoordI(5,1),CoordI(5,2)};
+        cells[1] = {CoordI(4,1),CoordI(5,1),CoordI(5,2),CoordI(6,1)};
+        cells[2] = {CoordI(5,0),CoordI(5,1),CoordI(5,2),CoordI(6,1)};
+        cells[3] = {CoordI(4,1),CoordI(5,0),CoordI(5,1),CoordI(6,1)};
+    }
+};
+
+class BlocoS:public Blocos{
+public:
+    BlocoS(){
+        id = 6;
+        cells[0] = {CoordI(4,1),CoordI(4,2),CoordI(5,0),CoordI(5,1)};
+        cells[1] = {CoordI(4,1),CoordI(5,1),CoordI(5,2),CoordI(6,2)};
+        cells[2] = {CoordI(4,1),CoordI(4,2),CoordI(5,0),CoordI(5,1)};
+        cells[3] = {CoordI(4,1),CoordI(5,1),CoordI(5,2),CoordI(6,2)};
+    }
+};
+
+class BlocoZ:public Blocos{
+public:
+    BlocoZ(){
+        id = 7;
+        cells[0] = {CoordI(4,0),CoordI(4,1),CoordI(5,1),CoordI(5,2)};
+        cells[1] = {CoordI(4,2),CoordI(5,1),CoordI(5,2),CoordI(6,1)};
+        cells[2] = {CoordI(4,0),CoordI(4,1),CoordI(5,1),CoordI(5,2)};
+        cells[3] = {CoordI(4,2),CoordI(5,1),CoordI(5,2),CoordI(6,1)}; 
+    }
+};
 
 
 

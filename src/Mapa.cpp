@@ -13,16 +13,15 @@ Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelul
     cores.clear();
     cores = {
         {0,sf::Color(20,10,46)},  //celula vazia
-        {1,sf::Color(0,240,240)}, //ciano
-        {2,sf::Color(0,0,240)}, //azul
+        {1,sf::Color(0,0,240)},   //azul
+        {2,sf::Color(240,240,0)}, //amarelo
         {3,sf::Color(240,160,0)}, //laranja
-        {4,sf::Color(240,240,0)}, //amarelo
-        {5,sf::Color(0,240,0)}, //verde
-        {6,sf::Color(160,0,240)}, //roxo
-        {7,sf::Color(240,0,0)}, //vermelho
+        {4,sf::Color(0,240,240)}, //ciano
+        {5,sf::Color(160,0,240)}, //roxo
+        {6,sf::Color(0,240,0)},   //verde
+        {7,sf::Color(240,0,0)},   //vermelho
         {10,sf::Color(43,26,74)}, //cor do grid
-     
-   
+         
     };
     
     it = cores.begin();

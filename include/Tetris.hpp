@@ -20,10 +20,19 @@ protected:
     Mapa mapa;
     sf::RectangleShape* fundo;
     sf::RectangleShape* grid;
-    BlocoL bloco;
+    std::vector<Blocos*> pecas;
+    std::vector<Blocos*>::iterator it;
+    int indicePeca;
 public:
     Tetris();
     ~Tetris();
+    
+    void criarCenario();
+    void criarPecas();
+    
+    void tratarEventos();
+    void atualizar();
+    void desenhar();
     
     void executar();
     
