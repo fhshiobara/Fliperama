@@ -20,6 +20,8 @@ protected:
     short int estado; // isso que vai dizer o estado de rotacao do objeto
     int cellSize;
     Mapa* pM;
+    int offsetColuna;
+    int offsetLinha;
     
 public:
     
@@ -31,6 +33,8 @@ public:
     int getEstado();
     void setEstado(int i);
     void draw();
+    void mover(int linhas, int colunas);
+    std::vector<CoordI> getCellPositions();
     
     void setMapa(Mapa *m);
     Mapa* getMapa();

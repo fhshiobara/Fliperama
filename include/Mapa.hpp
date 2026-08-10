@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "Entidade.hpp"
 #include "GerenciadorGrafico.hpp"
+
 #include <map>
 
 class Mapa:public Entidade{

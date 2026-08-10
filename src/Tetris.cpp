@@ -82,6 +82,7 @@ void Tetris::tratarEventos(){
 }
 
 void Tetris::atualizar(){//aqui entra a logica de cair
+
     mapa.inicializar();
     
     
@@ -93,7 +94,7 @@ void Tetris::desenhar(){
     pGG->render(grid);
     
     pecas[indicePeca]->draw(); // escreve o id da peca dentro do mapa
-    mapa.draw();                // desenha o mapa inteiro (ja com a peca dentro)
+    mapa.draw();// desenha o mapa inteiro (ja com a peca dentro)
     
     pGG->display();
 }

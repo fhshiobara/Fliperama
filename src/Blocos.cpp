@@ -7,7 +7,7 @@
 
 #include "Blocos.hpp"
 
-Blocos::Blocos():id(0),cellSize(30),estado(0),pM(NULL){
+Blocos::Blocos():id(0),cellSize(30),estado(0),pM(NULL),offsetColuna(0),offsetLinha(0){
     cells.clear();
 }
 
@@ -37,6 +37,22 @@ void Blocos::draw(){
             pM->mapa[it->y][it->x] = id;
         }
     }
+}
+
+void Blocos::mover(int linhas, int colunas){
+    offsetLinha+=linhas;
+    offsetColuna+=colunas;
+}
+
+std::vector<CoordI> Blocos::getCellPositions(){
+    std::vector<CoordI> pos = cells[estado];
+    std::vector<CoordI>::iterator it;
+    std::vector<CoordI> posFuturas;
+    for(it = pos.begin();it!=pos.end();it++){
+        CoordI novo = CoordI((*it).x+offsetLinha,(*it).y+offsetColuna);
+        posFuturas.push_back(novo);
+    }
+    return posFuturas;
 }
 
 
