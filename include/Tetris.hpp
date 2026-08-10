@@ -23,6 +23,8 @@ protected:
     std::vector<Blocos*> pecas;
     std::vector<Blocos*>::iterator it;
     int indicePeca;
+    sf::Clock clockQueda;
+    float intervaloQueda;
 public:
     Tetris();
     ~Tetris();

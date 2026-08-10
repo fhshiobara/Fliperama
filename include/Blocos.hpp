@@ -35,6 +35,8 @@ public:
     void draw();
     void mover(int linhas, int colunas);
     std::vector<CoordI> getCellPositions();
+    bool podeMover(int deltaLinha, int deltaColuna);
+    void resetOffset();
     
     void setMapa(Mapa *m);
     Mapa* getMapa();

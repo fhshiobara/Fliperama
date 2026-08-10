@@ -31,7 +31,7 @@ Mapa* Blocos::getMapa(){
 
 void Blocos::draw(){
     if(pM!=NULL){
-        std::vector<CoordI> tiles = cells[estado];
+        std::vector<CoordI> tiles = getCellPositions();
         std::vector<CoordI>::iterator it;
         for(it = tiles.begin();it!=tiles.end();it++){
             pM->mapa[it->y][it->x] = id;
@@ -49,10 +49,27 @@ std::vector<CoordI> Blocos::getCellPositions(){
     std::vector<CoordI>::iterator it;
     std::vector<CoordI> posFuturas;
     for(it = pos.begin();it!=pos.end();it++){
-        CoordI novo = CoordI((*it).x+offsetLinha,(*it).y+offsetColuna);
+        CoordI novo = CoordI((*it).x+offsetColuna,(*it).y+offsetLinha);
         posFuturas.push_back(novo);
     }
     return posFuturas;
+}
+
+bool Blocos::podeMover(int deltaLinha, int deltaColuna){
+    if(pM==NULL) return false;
+    std::vector<CoordI> pos = cells[estado];
+    std::vector<CoordI>::iterator it;
+    for(it = pos.begin(); it!=pos.end(); it++){
+        int coluna = it->x + offsetColuna + deltaColuna;
+        int linha  = it->y + offsetLinha + deltaLinha;
+        if(!pM->posicaoValida(linha, coluna)) return false;
+    }
+    return true;
+}
+
+void Blocos::resetOffset(){
+    offsetLinha = 0;
+    offsetColuna = 0;
 }
 
 

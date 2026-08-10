@@ -77,4 +77,30 @@ sf::Color Mapa::getCor(int id){
     return cores[0];
 }
 
+void Mapa::inicializarFixo(){
+    for(int l=0;l<numLinhas;l++)
+        for(int c=0;c<numCols;c++)
+            fixo[l][c] = 0;
+}
+
+void Mapa::copiarFixoParaMapa(){
+    for(int l=0;l<numLinhas;l++)
+        for(int c=0;c<numCols;c++)
+            mapa[l][c] = fixo[l][c];
+}
+
+void Mapa::fixarCelulas(std::vector<CoordI> celulas, int id){
+    std::vector<CoordI>::iterator it;
+    for(it = celulas.begin(); it!=celulas.end(); it++){
+        fixo[it->y][it->x] = id;  // y=linha, x=coluna
+    }
+}
+
+bool Mapa::posicaoValida(int linha, int coluna){
+    if(linha<0 || linha>=numLinhas) return false;
+    if(coluna<0 || coluna>=numCols) return false;
+    if(fixo[linha][coluna]!=0) return false;
+    return true;
+}
+
 

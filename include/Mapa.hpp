@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "Entidade.hpp"
 #include "GerenciadorGrafico.hpp"
+#include <vector>
 
 #include <map>
 
@@ -24,11 +25,13 @@ protected:
     std::map <int,sf::Color>::iterator it;
     Gerenciadores::GerenciadorGrafico* pGG;
     
+
     
     
     
     
 public:
+    
     int mapa[20][10];
     Mapa();
     ~Mapa();
@@ -39,6 +42,11 @@ public:
     
     float correcaoX;
     float correcaoY;
+    int fixo[20][10];   // grade permanente com os blocos já travados
+    void inicializarFixo();
+    void copiarFixoParaMapa();
+    void fixarCelulas(std::vector<CoordI> celulas, int id);
+    bool posicaoValida(int linha, int coluna);
     
     
     

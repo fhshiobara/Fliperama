@@ -7,7 +7,7 @@
 
 #include "Tetris.hpp"
 
-Tetris::Tetris():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),grid(NULL),indicePeca(0){
+Tetris::Tetris():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),grid(NULL),indicePeca(0),intervaloQueda(0.5f){
     criarCenario();
     criarPecas();
 }
@@ -75,17 +75,36 @@ void Tetris::tratarEventos(){
                     pecas[indicePeca]->setEstado((estadoAtual+1)%4);
                     break;
                 }
+                case sf::Keyboard::Left:
+                    if(pecas[indicePeca]->podeMover(0,-1)) pecas[indicePeca]->mover(0,-1);
+                    break;
+                case sf::Keyboard::Right:
+                    if(pecas[indicePeca]->podeMover(0,1)) pecas[indicePeca]->mover(0,1);
+                    break;
+                case sf::Keyboard::Down:
+                    pecas[indicePeca]->mover(1, 0);    // desce uma linha
+                    break;
                 default: break;
             }
         }
     }
 }
 
-void Tetris::atualizar(){//aqui entra a logica de cair
+void Tetris::atualizar(){
+    mapa.copiarFixoParaMapa();
 
-    mapa.inicializar();
-    
-    
+    if(clockQueda.getElapsedTime().asSeconds() >= intervaloQueda){
+        Blocos* pecaAtual = pecas[indicePeca];
+        if(pecaAtual->podeMover(1,0)){
+            pecaAtual->mover(1,0);
+        } else {
+            mapa.fixarCelulas(pecaAtual->getCellPositions(), pecaAtual->getId());
+            pecaAtual->resetOffset();
+            pecaAtual->setEstado(0);
+            indicePeca = rand()%pecas.size(); // próxima peça
+        }
+        clockQueda.restart();
+    }
 }
 void Tetris::desenhar(){
     pGG->clear();
