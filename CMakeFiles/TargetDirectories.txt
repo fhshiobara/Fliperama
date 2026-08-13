@@ -1,0 +1,3 @@
+/Users/shiobara/Documents/Fliperama/CMakeFiles/Fliperama.dir
+/Users/shiobara/Documents/Fliperama/CMakeFiles/ALL_BUILD.dir
+/Users/shiobara/Documents/Fliperama/CMakeFiles/ZERO_CHECK.dir

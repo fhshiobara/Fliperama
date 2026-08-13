@@ -47,6 +47,7 @@ public:
     void copiarFixoParaMapa();
     void fixarCelulas(std::vector<CoordI> celulas, int id);
     bool posicaoValida(int linha, int coluna);
+    int limparLinhasCompletas();
     
     
     

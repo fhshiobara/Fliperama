@@ -10,6 +10,7 @@
 
 Mapa::Mapa():tamanho(CoordF(400.f,600.f)),numCols(10),numLinhas(20),tamanhoCelula(30),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),correcaoX(0.f),correcaoY(0.f){
     inicializar();
+    inicializarFixo();
     cores.clear();
     cores = {
         {0,sf::Color(20,10,46)},  //celula vazia
@@ -101,6 +102,29 @@ bool Mapa::posicaoValida(int linha, int coluna){
     if(coluna<0 || coluna>=numCols) return false;
     if(fixo[linha][coluna]!=0) return false;
     return true;
+}
+
+int Mapa::limparLinhasCompletas(){
+    int linhasRemovidas = 0;
+    for(int l = numLinhas-1; l >= 0; l--){
+        bool completa = true;
+        for(int c = 0; c < numCols; c++){
+            if(fixo[l][c] == 0){ completa = false; break; }
+        }
+        if(completa){
+            for(int linhaAtual = l; linhaAtual > 0; linhaAtual--){
+                for(int c = 0; c < numCols; c++){
+                    fixo[linhaAtual][c] = fixo[linhaAtual-1][c];
+                }
+            }
+            for(int c = 0; c < numCols; c++){
+                fixo[0][c] = 0;
+            }
+            linhasRemovidas++;
+            l++; // reprocessa a mesma posição, já que agora tem conteúdo novo ali
+        }
+    }
+    return linhasRemovidas;
 }
 
 

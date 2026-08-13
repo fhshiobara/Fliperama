@@ -20,11 +20,20 @@ protected:
     Mapa mapa;
     sf::RectangleShape* fundo;
     sf::RectangleShape* grid;
+    sf::RectangleShape* ponto;
     std::vector<Blocos*> pecas;
     std::vector<Blocos*>::iterator it;
     int indicePeca;
     sf::Clock clockQueda;
     float intervaloQueda;
+    bool gameOver;
+    sf::Text txtGameOver;
+    sf::Text txtReiniciar;
+    sf::Text pontos;
+    int pts;
+    std::vector<int> saco;
+    void reabastecerSaco();
+    int proximaPeca();
 public:
     Tetris();
     ~Tetris();
@@ -37,6 +46,8 @@ public:
     void desenhar();
     
     void executar();
+    void criarTextos();
+    void reiniciar();
     
 };
 
