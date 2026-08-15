@@ -33,6 +33,7 @@ protected:
     sf::Text txtPoderes;
     sf::Text txtPoderes2;
     sf::Text txtTutorial;
+    bool voltarMenu;
     
     int dt;
     

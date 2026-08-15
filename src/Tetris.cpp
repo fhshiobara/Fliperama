@@ -6,8 +6,8 @@
 //
 
 #include "Tetris.hpp"
-
-Tetris::Tetris():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),grid(NULL),indicePeca(0),intervaloQueda(0.5f),gameOver(false),ponto(NULL),pts(0){
+#include <string>
+Tetris::Tetris():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),grid(NULL),indicePeca(0),intervaloQueda(0.5f),gameOver(false),ponto(NULL),pts(0),voltarMenu(false){
     criarCenario();
     criarPecas();
     criarTextos();
@@ -75,50 +75,55 @@ void Tetris::tratarEventos(){
         }
         if(event.type == sf::Event::KeyPressed){
 
+            if(event.key.code == sf::Keyboard::Escape){
+                voltarMenu = true;
+                continue;
+            }
+
             if(gameOver){
                 if(event.key.code == sf::Keyboard::Enter){
                     reiniciar();
                 }
-                continue; // ignora qualquer outra tecla enquanto o jogo estiver acabado
+                continue;
             }
 
             switch(event.key.code){
                     /*
-                case sf::Keyboard::Num1:
-                    indicePeca = 0;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;
-                case sf::Keyboard::Num2:
-                    indicePeca = 1;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;
-                case sf::Keyboard::Num3:
-                    indicePeca = 2;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;
-                case sf::Keyboard::Num4:
-                    indicePeca = 3;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;
-                case sf::Keyboard::Num5:
-                    indicePeca = 4;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;
-                case sf::Keyboard::Num6:
-                    indicePeca = 5;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;
-                case sf::Keyboard::Num7:
-                    indicePeca = 6;
-                    pecas[indicePeca]->resetOffset();
-                    pecas[indicePeca]->setEstado(0);
-                    break;*/
+                                    case sf::Keyboard::Num1:
+                                        indicePeca = 0;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;
+                                    case sf::Keyboard::Num2:
+                                        indicePeca = 1;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;
+                                    case sf::Keyboard::Num3:
+                                        indicePeca = 2;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;
+                                    case sf::Keyboard::Num4:
+                                        indicePeca = 3;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;
+                                    case sf::Keyboard::Num5:
+                                        indicePeca = 4;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;
+                                    case sf::Keyboard::Num6:
+                                        indicePeca = 5;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;
+                                    case sf::Keyboard::Num7:
+                                        indicePeca = 6;
+                                        pecas[indicePeca]->resetOffset();
+                                        pecas[indicePeca]->setEstado(0);
+                                        break;*/
                 case sf::Keyboard::R:{
                     int estadoAtual = pecas[indicePeca]->getEstado();
                     pecas[indicePeca]->setEstado((estadoAtual+1)%4);
@@ -150,7 +155,13 @@ void Tetris::atualizar(){
             pecaAtual->mover(1,0);
         } else {
             mapa.fixarCelulas(pecaAtual->getCellPositions(), pecaAtual->getId());
-            mapa.limparLinhasCompletas();
+            int linhasRemovidas = mapa.limparLinhasCompletas();
+            if(linhasRemovidas > 0){
+                atualizarPontuacao(linhasRemovidas);
+            }
+
+            pecaAtual->resetOffset();
+            pecaAtual->setEstado(0);
 
             pecaAtual->resetOffset();
             pecaAtual->setEstado(0);
@@ -172,6 +183,7 @@ void Tetris::desenhar(){
     pGG->render(fundo);
     pGG->render(grid);
     pGG->render(ponto);
+    pGG->render(&pontos);
 
     if(!gameOver){
         pecas[indicePeca]->draw();
@@ -187,7 +199,7 @@ void Tetris::desenhar(){
 }
 
 void Tetris::executar(){
-    while(pGG->windowopen()){
+    while(pGG->windowopen() && !voltarMenu){
         tratarEventos();
         atualizar();
         desenhar();
@@ -208,6 +220,12 @@ void Tetris::criarTextos(){
         txtReiniciar.setCharacterSize(18);
         txtReiniciar.setFillColor(sf::Color::White);
         txtReiniciar.setPosition(465.f, 380.f);
+
+        pontos.setFont(*fonte);
+        pontos.setString("PONTOS\n0");
+        pontos.setCharacterSize(18);
+        pontos.setFillColor(sf::Color::White);
+        pontos.setPosition(ponto->getPosition().x + 10.f, ponto->getPosition().y + 10.f);
     }
 }
 
@@ -219,6 +237,8 @@ void Tetris::reiniciar(){
     }
     indicePeca = proximaPeca();
     gameOver = false;
+    pts = 0;
+    pontos.setString("PONTOS\n0");
     clockQueda.restart();
 }
 
@@ -239,4 +259,14 @@ int Tetris::proximaPeca(){
     int prox = saco.back();
     saco.pop_back();
     return prox;
+}
+void Tetris::atualizarPontuacao(int linhas){
+    switch(linhas){
+        case 1: pts += 40;   break;
+        case 2: pts += 100;  break;
+        case 3: pts += 300;  break;
+        case 4: pts += 1200; break; // Tetris de 4 linhas
+        default: break;
+    }
+    pontos.setString("PONTOS\n" + std::to_string(pts));
 }

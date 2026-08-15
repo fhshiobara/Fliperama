@@ -7,7 +7,7 @@
 
 #include "Pong.hpp"
 
-Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),pT(NULL),dt(0){
+Pong::Pong():R1(NULL),R2(NULL),bola(NULL),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),G1(NULL),G2(NULL),pV(NULL),pT(NULL),dt(0),voltarMenu(false){
     R1 = new Raquete(CoordF(5.f,5.f), CoordF(25.f,100.f));
     R2 = new Raquete(CoordF(5.f,5.f), CoordF (25.f,100.f));
     G1 = new Gol(CoordF(1250.f,0.f));
@@ -117,7 +117,7 @@ void Pong::setPosInicial(){
 void Pong::executar(){
     sf::Event event;
     telaTutorial();
-    while(pGG->windowopen()){
+    while(pGG->windowopen() && !voltarMenu){
   
         while(pGG->getWindow()->pollEvent(event)){
             if(event.type == sf::Event::Closed){
@@ -143,7 +143,7 @@ void Pong::executar(){
                 }
                 
                 if(event.key.code == sf::Keyboard::Escape){
-                    pGG->closeWindow();//serve apenas para fechar a janela
+                    voltarMenu = true;
                 }
             }
                     
@@ -175,8 +175,6 @@ void Pong::executar(){
                     txtPoderes.setFont(*fonte);
                     txtPoderes.setCharacterSize(48);
                     txtPoderes.setFillColor(sf::Color::White);
-                    //nao tenho a menor ideia de porque isso nao esta funcionando, vou fazer no pelo mais uma vez
-                    //txtPoderes.setPosition(pT->getPos().x+(pT->getTamanho().x)/2, pT->getPos().y-(pT->getTamanho().y)/2);
                     txtPoderes.setPosition(pV->getPos().x+(pV->getTamanho().x-16)/2,pV->getPos().y);
                 }
                 
@@ -194,11 +192,8 @@ void Pong::executar(){
                         txtPoderes2.setFont(*fonte);
                         txtPoderes2.setCharacterSize(48);
                         txtPoderes2.setFillColor(sf::Color::White);
-                        //nao tenho a menor ideia de porque isso nao esta funcionando, vou fazer no pelo mais uma vez
-                        //txtPoderes.setPosition(pT->getPos().x+(pT->getTamanho().x)/2, pT->getPos().y-(pT->getTamanho().y)/2);
                         txtPoderes2.setPosition(pT->getPos().x+(pT->getTamanho().x-16)/2,pT->getPos().y);
                     }
-                    
                     
                 
             }
@@ -247,21 +242,24 @@ void Pong::executar(){
 
 void Pong::telaTutorial(){
     sf::Event event;
-        bool comecar = false;
-        
-        while(pGG->windowopen() && !comecar){
-            while(pGG->getWindow()->pollEvent(event)){
-                if(event.type == sf::Event::Closed){
-                    pGG->closeWindow();
+    bool comecar = false;
+
+    while(pGG->windowopen() && !comecar && !voltarMenu){
+        while(pGG->getWindow()->pollEvent(event)){
+            if(event.type == sf::Event::Closed){
+                pGG->closeWindow();
+            }
+            if(event.type == sf::Event::KeyPressed){
+                if(event.key.code == sf::Keyboard::Enter){
+                    comecar = true;
                 }
-                if(event.type == sf::Event::KeyPressed){
-                    if(event.key.code == sf::Keyboard::Enter){
-                        comecar = true;
-                    }
+                if(event.key.code == sf::Keyboard::Escape){
+                    voltarMenu = true;
                 }
             }
-            pGG->clear();
-            pGG->render(&txtTutorial);
-            pGG->display();
         }
+        pGG->clear();
+        pGG->render(&txtTutorial);
+        pGG->display();
+    }
 }

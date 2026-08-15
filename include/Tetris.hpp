@@ -34,6 +34,7 @@ protected:
     std::vector<int> saco;
     void reabastecerSaco();
     int proximaPeca();
+    bool voltarMenu;
 public:
     Tetris();
     ~Tetris();
@@ -48,6 +49,7 @@ public:
     void executar();
     void criarTextos();
     void reiniciar();
+    void atualizarPontuacao(int linhas);
     
 };
 
