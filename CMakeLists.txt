@@ -63,6 +63,8 @@ set(SOURCES
     src/Tetris.cpp
     src/Blocos.cpp
     
+    src/MapaSnake.cpp
+    
     src/Menu.cpp
     
     
