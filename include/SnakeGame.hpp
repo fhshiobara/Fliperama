@@ -11,14 +11,18 @@
 #include <stdio.h>
 #include "GerenciadorGrafico.hpp"
 #include "MapaSnake.hpp"
+#include <vector>
 
 class SnakeGame{
 private:
     Gerenciadores::GerenciadorGrafico* pGG;
     MapaSnake mapa;
+    std::vector<Frutinha*> frutas;
+    
 public:
     SnakeGame();
     ~SnakeGame();
+    void addFrutas();
     void desenhar();
     void executar();
     void tratarEventos();

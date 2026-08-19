@@ -65,6 +65,7 @@ set(SOURCES
     
     src/MapaSnake.cpp
     src/SnakeGame.cpp
+    src/Frutinha.cpp
     
     src/Menu.cpp
     

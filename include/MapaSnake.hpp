@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include "SFML/Graphics.hpp"
 #include "GerenciadorGrafico.hpp"
+#include <map>
+#include "Frutinha.hpp"
 
 class MapaSnake{
 private:
@@ -18,6 +20,11 @@ private:
     int numLinhas;
     int tamCelula;
     Gerenciadores::GerenciadorGrafico* pGG;
+    float correcaoX;
+    float correcaoY;
+    std::map<int,sf::Color> cores;
+    std::map<int,sf::Color>::iterator it;
+    sf::RectangleShape* fundo;
 public:
     int mapa[30][30];
     MapaSnake();
@@ -27,7 +34,12 @@ public:
     void print();
     
     void criarLimites();
+    void criarXadrez();
     void draw();
+    
+    sf::Color getCor(int id);
+    void setFrutinha(Frutinha* f);
+    
     
 };
 
