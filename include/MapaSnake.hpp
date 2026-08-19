@@ -25,6 +25,7 @@ private:
     std::map<int,sf::Color> cores;
     std::map<int,sf::Color>::iterator it;
     sf::RectangleShape* fundo;
+    bool flag;
 public:
     int mapa[30][30];
     MapaSnake();
@@ -39,6 +40,7 @@ public:
     
     sf::Color getCor(int id);
     void setFrutinha(Frutinha* f);
+    bool getFlag();
     
     
 };

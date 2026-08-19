@@ -8,7 +8,7 @@
 #include "MapaSnake.hpp"
 #include <iostream>
 
-MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL){
+MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),flag(false){
     inicializar();
 
     criarXadrez();
@@ -20,15 +20,15 @@ MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores
     correcaoY = (720.f-alturamax)/2.f;
     
     cores = {
-        {0,sf::Color(190,245,190)},
-        {1,sf::Color(190,245,160)},
-        {2,sf::Color(34,139,34)},
+        {0,sf::Color(170,215,81)},
+        {1,sf::Color(162,209,73)},
+        {2,sf::Color(74,117,44)},
         {3,sf::Color(240,128,128)},
     };
     fundo = new sf::RectangleShape;
     fundo->setOrigin(0.f,0.f);
     fundo->setSize(sf::Vector2f(1280.f,720.f));
-    fundo->setFillColor(sf::Color(180,185,190));
+    fundo->setFillColor(sf::Color(87,138,52));
 }
 
 MapaSnake::~MapaSnake(){
@@ -85,9 +85,13 @@ void MapaSnake::criarXadrez(){
 
 void MapaSnake::draw(){
     pGG->render(fundo);
+    flag = false;
     
     for(int linhas=0;linhas<numLinhas;linhas++){
         for(int colunas=0;colunas<numCols;colunas++){
+            if(mapa[linhas][colunas]==3){
+                flag = true;
+            }
             sf::RectangleShape celula;
             celula.setSize(sf::Vector2f(tamCelula-1,tamCelula-1));
             celula.setOrigin(0.f,0.f);
@@ -114,3 +118,4 @@ sf::Color MapaSnake::getCor(int id){
 void MapaSnake::setFrutinha(Frutinha* f){
     mapa[f->getPos().x][f->getPos().y] = 3;
 }
+bool MapaSnake::getFlag(){return flag;}

@@ -17,7 +17,7 @@ class SnakeGame{
 private:
     Gerenciadores::GerenciadorGrafico* pGG;
     MapaSnake mapa;
-    std::vector<Frutinha*> frutas;
+    Frutinha* fruta;
     
 public:
     SnakeGame();

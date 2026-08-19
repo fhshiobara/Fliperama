@@ -7,7 +7,10 @@
 
 #include "SnakeGame.hpp"
 
-SnakeGame::SnakeGame():pGG(Gerenciadores::GerenciadorGrafico::getInstance()){
+SnakeGame::SnakeGame():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fruta(NULL){
+    fruta = new Frutinha;
+    fruta->setPos(CoordI(14,23));
+    mapa.setFrutinha(fruta);
     
 }
 SnakeGame::~SnakeGame(){}
@@ -28,7 +31,13 @@ void SnakeGame::desenhar(){
     pGG->display();
     
 }
-void SnakeGame::atualizar(){}
+void SnakeGame::atualizar(){
+    if(mapa.getFlag()==false){
+        fruta->setPos(CoordI(rand()%29,rand()%29));
+        mapa.setFrutinha(fruta);
+        
+    }
+}
 
 void SnakeGame::tratarEventos(){
     sf::Event event;
