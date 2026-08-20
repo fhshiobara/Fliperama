@@ -8,7 +8,7 @@
 #include "MapaSnake.hpp"
 #include <iostream>
 
-MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),flag(false){
+MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),flag(true){
     inicializar();
 
     criarXadrez();

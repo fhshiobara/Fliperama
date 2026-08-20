@@ -18,7 +18,8 @@ int main(){
     Gerenciadores::GerenciadorGrafico* pGG = Gerenciadores::GerenciadorGrafico::getInstance();
 
     while(pGG->windowopen()){
-        /*Menu menu;
+        /*
+        Menu menu;
         EscolhaJogo escolha = menu.executar();
 
         if(escolha == EscolhaJogo::TETRIS){
