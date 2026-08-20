@@ -8,6 +8,9 @@
 #include "Menu.hpp"
 
 Menu::Menu():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fundo(NULL),moldura(NULL),faixaTitulo(NULL),destaque(NULL),visivel(true),selecionado(0),escolha(EscolhaJogo::NENHUM){
+    // Lista dos jogos disponíveis
+    nomesOpcoes = {"TETRIS", "PONG", "SNAKE"};
+
     criarCenario();
     criarTextos();
 }
@@ -23,85 +26,102 @@ void Menu::criarCenario(){
     fundo = new sf::RectangleShape;
     fundo->setOrigin(0.f,0.f);
     fundo->setSize(sf::Vector2f(1280.f,720.f));
-    fundo->setFillColor(sf::Color(15,10,30)); // roxo quase preto
+    fundo->setFillColor(sf::Color(15,10,30)); // Roxo escuro estilo arcade
 
     moldura = new sf::RectangleShape;
-    moldura->setSize(sf::Vector2f(700.f,500.f));
-    moldura->setPosition(290.f,110.f);
-    moldura->setFillColor(sf::Color(15,10,30));
+    moldura->setSize(sf::Vector2f(720.f, 540.f));
+    moldura->setPosition(280.f, 90.f);
+    moldura->setFillColor(sf::Color(20,15,40));
     moldura->setOutlineThickness(6.f);
-    moldura->setOutlineColor(sf::Color(255,0,180)); // magenta neon
+    moldura->setOutlineColor(sf::Color(255, 0, 180)); // Magenta Neon
 
     faixaTitulo = new sf::RectangleShape;
-    faixaTitulo->setSize(sf::Vector2f(700.f,90.f));
-    faixaTitulo->setPosition(290.f,110.f);
-    faixaTitulo->setFillColor(sf::Color(255,0,180));
+    faixaTitulo->setSize(sf::Vector2f(720.f, 90.f));
+    faixaTitulo->setPosition(280.f, 90.f);
+    faixaTitulo->setFillColor(sf::Color(255, 0, 180));
 
     destaque = new sf::RectangleShape;
-    destaque->setSize(sf::Vector2f(400.f,60.f));
-    destaque->setFillColor(sf::Color(0,255,220)); // ciano neon
+    destaque->setSize(sf::Vector2f(440.f, 55.f));
+    destaque->setFillColor(sf::Color(0, 255, 220)); // Ciano Neon
 }
 
 void Menu::criarTextos(){
     sf::Font* fonte = pGG->getFont();
     if(fonte != NULL){
+        // Título Principal
         titulo.setFont(*fonte);
         titulo.setString("F L I P E R A M A");
-        titulo.setCharacterSize(40);
+        titulo.setCharacterSize(42);
         titulo.setStyle(sf::Text::Bold);
         titulo.setFillColor(sf::Color(15,10,30));
         sf::FloatRect bT = titulo.getLocalBounds();
-        titulo.setOrigin(bT.left+bT.width/2.f, bT.top+bT.height/2.f);
-        titulo.setPosition(640.f, 155.f);
+        titulo.setOrigin(bT.left + bT.width/2.f, bT.top + bT.height/2.f);
+        titulo.setPosition(640.f, 135.f);
 
-        opcaoTetris.setFont(*fonte);
-        opcaoTetris.setString("TETRIS");
-        opcaoTetris.setCharacterSize(36);
-        sf::FloatRect b1 = opcaoTetris.getLocalBounds();
-        opcaoTetris.setOrigin(b1.left+b1.width/2.f, b1.top+b1.height/2.f);
-        opcaoTetris.setPosition(640.f, 340.f);
+        // Opções dinâmicas dos jogos
+        float startY = 240.f;
+        float espacamentoY = 65.f;
 
-        opcaoPong.setFont(*fonte);
-        opcaoPong.setString("PONG");
-        opcaoPong.setCharacterSize(36);
-        sf::FloatRect b2 = opcaoPong.getLocalBounds();
-        opcaoPong.setOrigin(b2.left+b2.width/2.f, b2.top+b2.height/2.f);
-        opcaoPong.setPosition(640.f, 440.f);
+        for(size_t i = 0; i < nomesOpcoes.size(); ++i){
+            sf::Text txt;
+            txt.setFont(*fonte);
+            txt.setString(nomesOpcoes[i]);
+            txt.setCharacterSize(34);
+            txt.setStyle(sf::Text::Bold);
+            
+            sf::FloatRect bounds = txt.getLocalBounds();
+            txt.setOrigin(bounds.left + bounds.width/2.f, bounds.top + bounds.height/2.f);
+            txt.setPosition(640.f, startY + (i * espacamentoY));
 
+            textosOpcoes.push_back(txt);
+        }
+
+        // Instruções
         instrucao.setFont(*fonte);
         instrucao.setString("USE AS SETAS (OU W/S) PARA NAVEGAR");
         instrucao.setCharacterSize(16);
-        instrucao.setFillColor(sf::Color(150,150,170));
+        instrucao.setFillColor(sf::Color(170,170,200));
         sf::FloatRect b3 = instrucao.getLocalBounds();
-        instrucao.setOrigin(b3.left+b3.width/2.f, b3.top+b3.height/2.f);
-        instrucao.setPosition(640.f, 510.f);
+        instrucao.setOrigin(b3.left + b3.width/2.f, b3.top + b3.height/2.f);
+        instrucao.setPosition(640.f, 530.f);
 
+        // Rodapé Piscante
         rodape.setFont(*fonte);
         rodape.setString("PRESSIONE ENTER PARA JOGAR");
         rodape.setCharacterSize(20);
+        rodape.setStyle(sf::Text::Bold);
         rodape.setFillColor(sf::Color::Yellow);
         sf::FloatRect b4 = rodape.getLocalBounds();
-        rodape.setOrigin(b4.left+b4.width/2.f, b4.top+b4.height/2.f);
-        rodape.setPosition(640.f, 575.f);
+        rodape.setOrigin(b4.left + b4.width/2.f, b4.top + b4.height/2.f);
+        rodape.setPosition(640.f, 580.f);
     }
 
     atualizarDestaque();
 }
 
 void Menu::atualizarDestaque(){
-    if(selecionado == 0){
-        destaque->setPosition(440.f, 310.f);
-        opcaoTetris.setFillColor(sf::Color(15,10,30));
-        opcaoPong.setFillColor(sf::Color::White);
-    } else {
-        destaque->setPosition(440.f, 410.f);
-        opcaoPong.setFillColor(sf::Color(15,10,30));
-        opcaoTetris.setFillColor(sf::Color::White);
+    if(textosOpcoes.empty()) return;
+
+    float startY = 240.f;
+    float espacamentoY = 65.f;
+
+    // Reposiciona a caixa de destaque sobre a opção selecionada
+    destaque->setPosition(420.f, (startY + (selecionado * espacamentoY)) - 27.f);
+
+    // Ajusta a cor dos textos para dar contraste
+    for(size_t i = 0; i < textosOpcoes.size(); ++i){
+        if(static_cast<int>(i) == selecionado){
+            textosOpcoes[i].setFillColor(sf::Color(15,10,30)); // Escuro dentro do destaque ciano
+        } else {
+            textosOpcoes[i].setFillColor(sf::Color::White);
+        }
     }
 }
 
 void Menu::tratarEventos(){
     sf::Event event;
+    int totalOpcoes = static_cast<int>(nomesOpcoes.size());
+
     while(pGG->getWindow()->pollEvent(event)){
         if(event.type == sf::Event::Closed){
             pGG->closeWindow();
@@ -111,16 +131,18 @@ void Menu::tratarEventos(){
             switch(event.key.code){
                 case sf::Keyboard::Up:
                 case sf::Keyboard::W:
-                    selecionado = (selecionado==0) ? 1 : 0;
+                    selecionado = (selecionado - 1 + totalOpcoes) % totalOpcoes;
                     atualizarDestaque();
                     break;
                 case sf::Keyboard::Down:
                 case sf::Keyboard::S:
-                    selecionado = (selecionado==1) ? 0 : 1;
+                    selecionado = (selecionado + 1) % totalOpcoes;
                     atualizarDestaque();
                     break;
                 case sf::Keyboard::Enter:
-                    escolha = (selecionado==0) ? EscolhaJogo::TETRIS : EscolhaJogo::PONG;
+                    if(selecionado == 0) escolha = EscolhaJogo::TETRIS;
+                    else if(selecionado == 1) escolha = EscolhaJogo::PONG;
+                    else if(selecionado == 2) escolha = EscolhaJogo::SNAKE;
                     break;
                 case sf::Keyboard::Escape:
                     pGG->closeWindow();
@@ -133,12 +155,12 @@ void Menu::tratarEventos(){
 }
 
 void Menu::atualizar(){
-    if(clockPiscar.getElapsedTime().asSeconds() >= 0.5f){
+    if(clockPiscar.getElapsedTime().asSeconds() >= 0.4f){
         visivel = !visivel;
         clockPiscar.restart();
     }
     sf::Color cor = rodape.getFillColor();
-    cor.a = visivel ? 255 : 60;
+    cor.a = visivel ? 255 : 40;
     rodape.setFillColor(cor);
 }
 
@@ -149,8 +171,11 @@ void Menu::desenhar(){
     pGG->render(faixaTitulo);
     pGG->render(destaque);
     pGG->render(&titulo);
-    pGG->render(&opcaoTetris);
-    pGG->render(&opcaoPong);
+
+    for(auto& txt : textosOpcoes){
+        pGG->render(&txt);
+    }
+
     pGG->render(&instrucao);
     pGG->render(&rodape);
     pGG->display();
@@ -158,7 +183,7 @@ void Menu::desenhar(){
 
 EscolhaJogo Menu::executar(){
     escolha = EscolhaJogo::NENHUM;
-    while(pGG->windowopen() && escolha==EscolhaJogo::NENHUM){
+    while(pGG->windowopen() && escolha == EscolhaJogo::NENHUM){
         tratarEventos();
         atualizar();
         desenhar();

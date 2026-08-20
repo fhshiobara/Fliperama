@@ -8,13 +8,15 @@
 #ifndef Menu_hpp
 #define Menu_hpp
 
-#include <stdio.h>
+#include <vector>
+#include <string>
 #include "GerenciadorGrafico.hpp"
 
 enum class EscolhaJogo{
     NENHUM,
     TETRIS,
     PONG,
+    SNAKE,
     SAIR
 };
 
@@ -28,15 +30,16 @@ protected:
     sf::RectangleShape* destaque;
 
     sf::Text titulo;
-    sf::Text opcaoTetris;
-    sf::Text opcaoPong;
     sf::Text instrucao;
     sf::Text rodape;
+
+    std::vector<std::string> nomesOpcoes;
+    std::vector<sf::Text> textosOpcoes;
 
     sf::Clock clockPiscar;
     bool visivel;
 
-    int selecionado; // 0 = Tetris, 1 = Pong
+    int selecionado;
     EscolhaJogo escolha;
 
 public:
