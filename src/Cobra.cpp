@@ -34,8 +34,9 @@ CoordI Cobra::proximaPosicao() const{
     return cabeca;
 }
 
-void Cobra::mover(){
+void Cobra::mover(bool cresce){
     corpo.push_front(proximaPosicao());
+    if(!cresce) corpo.pop_back();
     direcaoAnterior = direcaoAtual;
 }
 

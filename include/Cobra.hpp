@@ -24,7 +24,7 @@ public:
 
     void setDirecao(Direcao d);
     CoordI proximaPosicao() const; // pra checar colisão/fruta ANTES de mover de fato
-    void mover();
+    void mover(bool cresce );
 
     CoordI getCabeca() const;
     const std::deque<CoordI>& getCorpo() const;

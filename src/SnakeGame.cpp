@@ -41,15 +41,17 @@ void SnakeGame::atualizar(){
 
     CoordI proxima = cobra.proximaPosicao();
 
+    // colisão com parede ou com o próprio corpo
     if(mapa.mapa[proxima.x][proxima.y] == 2 || cobra.ocupaPosicao(proxima)){
-        pGG->closeWindow();
+        pGG->closeWindow(); // depois você troca por uma tela de "game over"
         return;
     }
 
-    cobra.mover(); // sempre cresce
+    bool vaiComer = (proxima.x == fruta->getPos().x && proxima.y == fruta->getPos().y);
+    cobra.mover(vaiComer);
 
-    if(proxima.x == fruta->getPos().x && proxima.y == fruta->getPos().y){
-        fruta->setPos(CoordI(rand()%29, rand()%29));
+    if(vaiComer){
+        fruta->setPos(CoordI(rand()%28+1, rand()%28+1));
         mapa.setFrutinha(fruta);
     }
 }
