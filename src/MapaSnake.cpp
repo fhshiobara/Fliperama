@@ -13,6 +13,9 @@ MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores
 
     criarXadrez();
     criarLimites();
+    for(int i=0;i<numLinhas;i++)
+            for(int j=0;j<numCols;j++)
+                mapaBase[i][j] = mapa[i][j];
     
     float larguramax = numCols*tamCelula;
     float alturamax = numLinhas*tamCelula;
@@ -24,6 +27,8 @@ MapaSnake::MapaSnake():numCols(30),numLinhas(30),tamCelula(20),pGG(Gerenciadores
         {1,sf::Color(162,209,73)},
         {2,sf::Color(74,117,44)},
         {3,sf::Color(240,128,128)},
+        {4,sf::Color(70,123,236)},
+        {5,sf::Color(59,98,196)},
     };
     fundo = new sf::RectangleShape;
     fundo->setOrigin(0.f,0.f);
@@ -119,3 +124,19 @@ void MapaSnake::setFrutinha(Frutinha* f){
     mapa[f->getPos().x][f->getPos().y] = 3;
 }
 bool MapaSnake::getFlag(){return flag;}
+void MapaSnake::sincronizar(Frutinha* f, const std::deque<CoordI>& corpoCobra){
+    // 1. restaura o fundo
+    for(int i=0;i<numLinhas;i++)
+        for(int j=0;j<numCols;j++)
+            mapa[i][j] = mapaBase[i][j];
+
+    // 2. carimba a fruta
+    mapa[f->getPos().x][f->getPos().y] = 3;
+
+    // 3. carimba a cobra (cabeça com cor diferente do corpo)
+    bool ehCabeca = true;
+    for(const auto& seg : corpoCobra){
+        mapa[seg.x][seg.y] = ehCabeca ? 5 : 4;
+        ehCabeca = false;
+    }
+}

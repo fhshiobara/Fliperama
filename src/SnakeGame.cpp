@@ -7,11 +7,14 @@
 
 #include "SnakeGame.hpp"
 
-SnakeGame::SnakeGame():pGG(Gerenciadores::GerenciadorGrafico::getInstance()),fruta(NULL){
+SnakeGame::SnakeGame()
+    : pGG(Gerenciadores::GerenciadorGrafico::getInstance()),
+      fruta(NULL),
+      cobra(CoordI(15,15)),
+      intervaloMovimento(0.15f){
     fruta = new Frutinha;
     fruta->setPos(CoordI(14,23));
     mapa.setFrutinha(fruta);
-    
 }
 SnakeGame::~SnakeGame(){}
 
@@ -27,15 +30,27 @@ void SnakeGame::executar(){
 void SnakeGame::desenhar(){
     
     pGG->clear();
+    mapa.sincronizar(fruta,cobra.getCorpo());
     mapa.draw();
     pGG->display();
     
 }
 void SnakeGame::atualizar(){
-    if(mapa.getFlag()==false){
-        fruta->setPos(CoordI(rand()%29,rand()%29));
+    if(relogio.getElapsedTime().asSeconds() < intervaloMovimento) return;
+    relogio.restart();
+
+    CoordI proxima = cobra.proximaPosicao();
+
+    if(mapa.mapa[proxima.x][proxima.y] == 2 || cobra.ocupaPosicao(proxima)){
+        pGG->closeWindow();
+        return;
+    }
+
+    cobra.mover(); // sempre cresce
+
+    if(proxima.x == fruta->getPos().x && proxima.y == fruta->getPos().y){
+        fruta->setPos(CoordI(rand()%29, rand()%29));
         mapa.setFrutinha(fruta);
-        
     }
 }
 
@@ -45,6 +60,14 @@ void SnakeGame::tratarEventos(){
         if(event.type == sf::Event::Closed){
             pGG->closeWindow();
         }
-        // depois você adiciona aqui as teclas de direção da cobra
+        if(event.type == sf::Event::KeyPressed){
+            switch(event.key.code){
+                case sf::Keyboard::Up:    cobra.setDirecao(Direcao::ESQUERDA); break;
+                case sf::Keyboard::Down:  cobra.setDirecao(Direcao::DIREITA); break;
+                case sf::Keyboard::Left:  cobra.setDirecao(Direcao::CIMA); break;
+                case sf::Keyboard::Right: cobra.setDirecao(Direcao::BAIXO); break;
+                default: break;
+            }
+        }
     }
 }

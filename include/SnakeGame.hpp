@@ -12,12 +12,16 @@
 #include "GerenciadorGrafico.hpp"
 #include "MapaSnake.hpp"
 #include <vector>
+#include "Cobra.hpp"
 
 class SnakeGame{
 private:
     Gerenciadores::GerenciadorGrafico* pGG;
     MapaSnake mapa;
     Frutinha* fruta;
+    Cobra cobra;
+    sf::Clock relogio;
+    float intervaloMovimento;
     
 public:
     SnakeGame();

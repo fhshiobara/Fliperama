@@ -13,6 +13,7 @@
 #include "GerenciadorGrafico.hpp"
 #include <map>
 #include "Frutinha.hpp"
+#include <deque>
 
 class MapaSnake{
 private:
@@ -26,6 +27,7 @@ private:
     std::map<int,sf::Color>::iterator it;
     sf::RectangleShape* fundo;
     bool flag;
+    int mapaBase[30][30];
 public:
     int mapa[30][30];
     MapaSnake();
@@ -41,6 +43,7 @@ public:
     sf::Color getCor(int id);
     void setFrutinha(Frutinha* f);
     bool getFlag();
+    void sincronizar(Frutinha* f, const std::deque<CoordI>& corpoCobra);
     
     
 };

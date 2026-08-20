@@ -8,18 +8,28 @@
 #ifndef Cobra_hpp
 #define Cobra_hpp
 
-#include <stdio.h>
+#include <deque>
+#include "VectorTL.hpp"
+
+enum class Direcao { CIMA, BAIXO, ESQUERDA, DIREITA };
 
 class Cobra{
-protected:
-    int x;
-    int y;
-    Cobra* corpo;
+private:
+    std::deque<CoordI> corpo; // corpo.front() = cabeça, corpo.back() = cauda
+    Direcao direcaoAtual;
+    Direcao direcaoAnterior; // evita a cobra virar 180° sobre si mesma
 public:
-    Cobra();
+    Cobra(CoordI posInicial);
     ~Cobra();
-    Cobra* getCorpo();
-    void setCorpo(Cobra* cobra);
+
+    void setDirecao(Direcao d);
+    CoordI proximaPosicao() const; // pra checar colisão/fruta ANTES de mover de fato
+    void mover();
+
+    CoordI getCabeca() const;
+    const std::deque<CoordI>& getCorpo() const;
+
+    bool ocupaPosicao(CoordI pos) const;
 };
 
-#endif /* Cobra_hpp */
+#endif
